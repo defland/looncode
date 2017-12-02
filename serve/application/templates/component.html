@@ -1,0 +1,284 @@
+<!-- 这个文档放置组件，利用macro实现 -->
+
+
+{# 组件定义 #}
+<!-- 网页标题栏块 -->
+
+{% macro contents_title(title="课程标题",description="课程副标题")-%}
+    
+    <div class="l-title ">
+        <h1>{{title}}</h1>
+        <p>{{description}}</p>
+    </div>
+    <div class="l-title-line"></div>
+
+{%- endmacro %}
+
+
+<!--登录注册组件 -->
+{% macro login_panel(current_user=None,current_url='',next_url='') %}
+    
+<!--     {{current_user.__dict__}} -->
+
+    <!-- 注册登录、我的面板 -->
+    {# 用户信息 #}
+    {% if (current_user.is_authenticated) %}
+    <div class="user_login ">
+        <div class="login_links">
+            <a href="#" class=" button-collapse" data-activates="is_active_course_nav" > 
+                {{ current_user.id }}
+                {%if current_user.data.user_type==0 %}
+                    <span class="label  grey lighten-1 ">免费用户</span>
+                {%elif (current_user.data.user_type==1) %}
+                    <span class="label orange darken-4 ">VIP会员</span>
+                {%endif%}
+                 <i class="material-icons dp48">arrow_drop_down</i>
+             </a>
+               
+        </div>
+    </div>
+
+    {%else%}
+        <!-- 注册登录 -->
+        <div class="user_login ">
+            <div class="login_links">
+                <a href="#login_modal">注册 | 登录</a>
+            </div>
+        </div>
+    {% endif %}
+    <!-- 弹出层 -->
+        {# 这里是弹出层，输入购买验证码 #}
+    <!-- modal内容，输入兑换码 -->
+    <div class="remodal login_register_modal z-depth-2 " data-remodal-id="login_modal">
+        
+
+        <div class="row">
+            
+            <div class="register_div col s6">
+                <h5>用户注册</h5>
+                <form action="/fast_register" method="POST" class="login_register_form">
+                    
+                    <input placeholder="请输入用户名" id="register_username" type="text" class="login_register_input" name="register_username">
+                    
+                    <input placeholder="设置您的密码(6位以上)" id="register_password" type="password" class="login_register_input hideShowPassword-hidden login-field" name="register_password" pattern=".{6,}">
+                    <!--                     <div class="my-toggle-class hideShowPassword-toggle-show">Show</div> -->
+                    <input placeholder="VIP会员激活码(选填)" id="register_vipcode" type="text" class="login_register_input" name="register_vipcode" pattern=".{6,}" >
+                    
+                    {# 错误提示区域 #}
+                    {% with messages = get_flashed_messages(category_filter=["register_error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="row">
+                                <div class="chip register_login_error">{{message}} <i class="close material-icons">close</i> </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        
+                    {% endif %}
+                {% endwith %}
+                
+                <div class="row">
+                    <a href="/membership" class=" col s6 supercode_links ">了解VIP会员特权</a>
+                    <button class="waves-effect  z-depth-0 waves-light btn login_register_btn login_btn " type="submit">立即注册</button>
+                </div>
+            </form>
+            </div>
+            <div class="login_div col s6"  >
+            <h5>登录</h5>
+            <form action="/fast_login?next_url={{next_url}}" method="POST" class="login_register_form">
+                <input placeholder="请输入用户名" id="first_name" type="text" class="login_register_input" name="login_username">
+                
+                <input  placeholder="请输入您的密码" id="password" type="password" class="login_register_input" name="login_password">
+                {# 错误提示区域 #}
+                {% with messages = get_flashed_messages(category_filter=["login_error"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="row">
+                            <div class="chip register_login_error">{{message}}<i class="close material-icons">close</i> </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    
+                {% endif %}
+            {% endwith %}
+            <div class="row">
+                <p>
+                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" name='remember_me_flag'>
+                    <label for="filled-in-box" class="user_remember_label">记住登录状态</label>
+                </p>
+                <button  class="waves-effect z-depth-0 waves-light btn login_register_btn" type="submit">登录</button>
+            </div>
+            </form>
+            </div>
+        </div>
+
+        
+    </div>
+
+{% endmacro %}
+
+
+<!-- 一兑换课程，我的，侧边栏 -->
+{% macro my_panel(current_user=None,category=None) %}
+
+
+
+  <!-- 已兑换的课程显示弹窗 -->
+    <ul id="is_active_course_nav" class="side-nav is_active_course_nav">
+        <li><div class="user-view">
+                <div class="background">
+                    <img src="/static/img/other/active_course_bk.png">
+                </div>
+               
+                {% if (current_user.is_authenticated) %}
+                <!-- 已经登录的用户 -->
+                    <a href="#!user"><img class="circle" src="/static/img/other/myuser.jpg"></a>
+                    <a href="#!name"><span class="white-text name">{{current_user.data.username}}</span></a>
+                    <!-- 判断会员等级 -->
+                    {% if current_user.data.user_type == 1 %}
+                        <a href="#!email">
+                            <img src="/static/img/other/vip_enable.png" class="vip_img" alt="">
+                            <span class="white-text email vip_span ">VIP会员</span>
+                            <span class="white-text  vip_span ">类型：永久会员</span>
+                        </a>
+                    {% else %}
+                        <a href="#!email">
+                            <img src="/static/img/other/vip_disable.png" class="vip_img"   alt="">
+                            <span class="white-text email vip_span">免费会员 <a href="/membership" class="vip_span">查看会员计划</a>&nbsp<a href="/vipactive" class="vip_span">兑换vip会员</a></span>
+                        </a>
+                    {%endif%}
+
+                {%else%}
+                    <a href="/login"><img class="circle" src="/static/img/other/wait_login.png"></a>
+                    <a href="/login"><span class="white-text name">未登录用户，点击登录</span></a>
+                {%endif%}
+
+                
+            </div>
+        </li>
+
+        <!-- 课程显示区域 -->
+        <!-- vip用户和普通用户非登录用户的显示区别 -->
+        {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
+            <li><a class="subheader">VIP会员已激活所有课程和书籍权限</a></li>
+        {%else%}
+            <li><a class="subheader">已兑换的课程</a></li>
+        {% endif  %}
+        
+        {% for cate in category %} 
+            {% if cate.category_active_course %}
+                {% for course in cate.category_active_course %} 
+                    <li>
+                        <a class=" waves-effect waves-brown waves-ripple" href="/course/{{course.course_id}}" >
+                            <i class="material-icons"><span class="my-glyphicon glyphicon glyphicon-book" aria-hidden="true"></span></i>
+                        
+                            <div class="chip is_active_text">
+                               <!--  <img src="{{course.course_img}}" alt="ico" \> -->
+                                {{course.course_name}} &nbsp<span>{{course.course_size}}G</span>  
+                            </div>
+                        </a>
+                    </li>
+                {%endfor%}
+            {%endif%}
+        {%endfor%}
+        <li><a class="subheader">更多</a></li>
+        <li><a href="https://shop131223524.taobao.com/search.htm?spm=a1z10.3-c-s.0.0.374398cdncEOPx&search=y" class=" waves-effect waves-brown waves-ripple" ><i class="material-icons"><span class="my-glyphicon glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></i>前往店铺</a></li>
+        
+        <!-- 注册用户出现的按钮 -->
+        {% if (current_user.is_authenticated) %}
+            <li><a href="/logout" class=" waves-effect waves-brown waves-ripple" ><i class="material-icons"><span class="glyphicon glyphicon-home my-glyphicon" aria-hidden="true"></span></i>退出登录</a></li>
+        {%endif%}
+        <!-- <li><div class="divider"></div></li>
+        <li><a class="subheader">操作</a></li>
+        <li><a class="waves-effect blue-text text-darken-2 " href="#!">去电脑版店铺</a></li>
+        <li><a class="waves-effect blue-text text-darken-2 " href="#!">扫码去移动端店铺</a></li>
+        <li><img class = "taobao_qc" src="/static/img/other/taobao_qc.png"></a></li> -->
+    </ul>
+
+
+
+
+
+
+
+{%endmacro%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 课程详情页右侧面板 -->
+{# 内页标题栏目 + 右侧功能按钮 #}
+
+{% macro course_sub_title(
+    course_id = '',
+    course_is_free = false,
+    course_read_count = None,
+    course_name="课程名称",
+    img_url="",
+    course_category="类别",
+    course_count="",
+    course_size=0,
+    course_passwd=None
+) %}
+
+<div class="l-sub-title-left row">
+    
+    {# 左边是课程的信息 #}
+    <div class="col s1 lstl-img"><img src="{{img_url}}"></div>
+    <div class=" col s5">
+        <h5>{{course_name}}</h5>
+        <span class="course_span">{{course_category}} | {{course_count}}套课程 | {{course_size}}G | {{course_read_count}} k+次查看</span> &nbsp
+        {%if course_passwd != None %}
+            {%if course_is_free == True %}
+                <span class="label label-success">限免课程</span>
+            {% else %}
+                <span class="label label-success">已兑换</span>
+                
+            {%endif%}
+        {%endif%}
+    </div>
+    {# 右边是操作，返回上一页，兑换课程，导出地址和提取码 #}
+    <div class="col s6">
+        <div class="lstl-control">
+            <div class="btn-group">
+                <a href="/index"><button  type="button" class="btn btn-default grey darken-1 tooltipped z-depth-0" aria-label="Left Align" data-tooltip="返回上一页" >
+                    <span title = "返回上一页" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </button></a>
+
+                <a href="#" data-activates="slide-out" ><button title = "d"  type="button" class="btn btn-default grey darken-1  button-collapse tooltipped z-depth-0"   aria-label="Right Align" data-activates="slide-out"  data-tooltip="前往店铺购买此课程">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                </button></a>
+                
+                {%if course_passwd %}
+                <!-- 下载课程密码TEXT,需要兑换后才能下载 -->
+                    <a href="/get_course_txt/{{course_id}}">
+                        <button type="button" class="btn btn-default grey darken-1 tooltipped z-depth-0" aria-label="Right Align" data-tooltip="导出为txt保持到本地" onclick="Materialize.toast('导出成功,保存文件至本地!', 2000, 'rounded')">
+                            <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                        </button>
+                    </a>
+                {%else%} 
+                    <!-- 没有兑换的时候 -->
+                    <a href="#act_modal">
+                        <button type="button" class="btn btn-default grey darken-1 tooltipped z-depth-0" aria-label="Right Align" data-tooltip="导出为txt保持到本地" onclick="Materialize.toast('请先兑换课程~!', 1800,)">
+                        <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                        </button>
+                    </a>
+                {%endif%} 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="l-title-line"></div>
+
+{% endmacro%}
+

@@ -1,0 +1,199 @@
+{% extends "/mobile/m_base.html" %}
+
+{% block title%} {{course_data.course_name}}  {%endblock%}
+
+
+
+{% block contents %}
+
+    {# 内页顶部导航 #}
+    <div class="header_nav">
+        
+        <div class="header_nav_back am-u-sm-1">
+            <a href="/m/home">
+                <i class="am-icon-chevron-left"></i>
+            </a>
+        </div>
+         <div class="header_nav_info am-u-sm-11">
+            <p> {{course_data.course_name}} </p>
+         </div> 
+    </div>
+    {# 课程信息 #}
+    <div class="course_detail">
+        
+        <div class="course_detail_img">
+            <img src="{{course_data.course_img}}" alt="">
+        </div>
+        <div class="course_detail_about">
+            
+            <div class="course_detail_about_data am-u-sm-4 ">
+                <h3>{{course_data.course_count}}</h3>
+                <p>套课程包</p> 
+            </div>
+            <div class="course_detail_about_data am-u-sm-4 ">
+                <h3>{{course_data.course_size}}</h3>
+                <p>G累计大小</p> 
+            </div>
+            <div class="course_detail_about_data am-u-sm-4 ">
+                <h3>{{course_data.course_read_count}}</h3>
+                <p>k浏览量</p> 
+            </div>
+        </div>
+
+    </div>
+   
+
+    <p class="course_category"><i class="am-icon-gg"></i> &nbsp课程资源</p>
+    {# 课程资源详情 #}
+    <div class="course_resource">
+            
+
+        {# 每个资源 #}
+        <section data-am-widget="accordion" class="am-accordion am-accordion-basic  resource_accordion" data-am-accordion='{  }'>
+            {%for i in course_data.course_data %}
+            <dl class="am-accordion-item ">
+                <dt class="am-accordion-title">
+                    <span class="am-badge  resource_size">{{i.resource_size}}G</span>
+                    {{loop.index}}.{{i.resource_name}} 
+                </dt>
+                <dd class="am-accordion-bd am-collapse ">
+                    <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+                    <div class="am-accordion-content">
+                        <ul class="am-list">
+                            <li>简介:{{i.resource_description}}  </li>
+                            <li>更新时间：2017-1-31</li>
+                            <li>百度云链接 <a href="{{i.resource_addr}}">{{i.resource_addr}}</a></li>
+                            
+                            {%if passwd_dict %}
+                                <li>提取密码：<code>{{ passwd_dict.get(i.resource_id) }} </code></li>
+                            {% else %}
+                                <li>提取密码：<code>兑换课程后显示提取码</code></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+            {%endfor%}
+            <dl class="am-accordion-item ">
+                <dt class="am-accordion-title">
+                    <span class="am-badge  resource_size">{{course_data.course_size}}G</span>
+                    [ALL].所有课程打包一次转存,空间占用较多，建议选择性保存
+                </dt>
+                <dd class="am-accordion-bd am-collapse ">
+                    <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+                    <div class="am-accordion-content">
+                        <ul class="am-list">
+                            <li>简介:以上课程打包一次转存,空间占用较多，建议选择性保存  </li>
+                            <li>提示:更新课程如有遗漏请手动保存新课程 </li>
+                            <li>百度云链接 <a href="{{course_data.course_share_url}}">{{course_data.course_share_url}}</a></li>
+                            
+                            {%if passwd_dict %}
+                                <li>提取密码：<code>{{course_data.course_share_passwd}} </code></li>
+                            {% else %}
+                                <li>提取密码：<code>兑换课程后显示提取码 </code></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+        </section>
+    
+    
+    {# 兑换课程弹出层 #}
+    <div class="am-popup act_model" id="my-popup">
+            
+        <div class="act_model_img">
+            <img src="../../static/img/other/act_card_bk.png" alt="" />
+        </div>
+        <div class="act_model_form">
+            <form  method="POST" action="/m/course/{{course_data.course_id}}" >
+                
+                <div class="act_input">
+                    <input type="text" name='key' onkeyup="value=value.replace(/[^\d]/g,'')" pattern="[0-9]{4}" class="am-form-field am-round" placeholder=" &nbsp输入4位数字课程兑换码"/>
+                </div>
+                <div class="act_btn">
+                    <button type="submit" class="am-btn am-btn-success am-round">兑换课程</button>
+                </div>
+              
+              
+            </form>
+        </div>
+
+    </div>
+
+    {# 转存课程弹窗 #}
+    {%if passwd_dict %}
+    <div class="am-popup act_model" id="sava-popup">
+            
+        <div class="act_model_img">
+            <img src="../../static/img/other/act_card_bk.png" alt="" />
+        </div>
+        <div class="act_model_form">
+            <ul class="am-list sava_list">
+                <li>所有课程打包链接,空间占用比较大,建议选择性保存:<br> {{course_data.course_count}}套课程共{{course_data.course_size}}G</li>
+                <li>网盘地址：<br><a href="{{course_data.course_share_url}}">{{course_data.course_share_url}}</a></li>
+                <li>提取密码：<code>{{course_data.course_share_passwd}}</code> </li>
+
+            </ul>
+        </div>
+
+    </div>
+    {% endif %}
+    
+
+
+    </div>
+    {# 尾部工具栏 #}
+        {# 尾部导航 #}
+    <div class="footnav">
+            
+        <div class="tools_buy am-u-sm-8">
+            <p>
+                {{course_data.course_count}} 套课程共{{course_data.course_size}}G
+                <br>
+
+                {%if passwd_dict %}
+                    {%if course_data.course_is_free %} 
+                        <span class="am-badge am-badge-success am-radius act_success">限时免费分享课程</span>  
+
+                    {%else%}    
+                        <span class="am-badge am-badge-success am-radius act_success">课程已成功兑换</span>  
+                    {%endif%}
+                {%else%}
+                    
+                   
+                    
+                    <!-- 用flash做错误提示 -->
+                    {% with messages = get_flashed_messages(category_filter=["act_error"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <a data-am-modal="{target: '#my-popup'}" class="code_error">{{ message }}</a>
+                            {% endfor %}
+                        {%else%}
+                            <a href="http://shop131223524.m.taobao.com">购买兑换码</a>
+                        {% endif %}
+                    {% endwith %}
+
+                {%endif%}
+            </p>
+        </div>
+        <div class="tools_act am-u-sm-4">
+            {%if passwd_dict %}
+                <a href="javascript:void(0)" data-am-modal="{target: '#sava-popup'}" class="save_all" >转存所有课程</a>
+            {%else%}
+                <a href="javascript:void(0)"   data-am-modal="{target: '#my-popup'}" >兑换课程</a>
+
+            {%endif%}
+        </div>
+        
+    </div>
+
+
+{% endblock %}
+
+
+
+<!-- 这个页面集成美洽客服 -->
+{%block meiqia%}
+   
+{%endblock%}

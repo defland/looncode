@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{%block title%} 懒人vip会员激活 {%endblock%}
+
+
+{% block contents %}
+
+
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+    
+
+
+    <div class="nav_bk">
+            <!-- 注册登录入口和登录模态窗口 -->
+            {{md.login_panel(current_user=current_user,current_url='/vipactive',next_url='/index')}}
+            <h5>懒人VIP会员激活</h5>
+            <p>把100%的努力放在编程实践上，而非资料收集</p>
+            <div class="nav_bk_bk">
+                <img class="nav_bk_img" src="/static/img/other/homepage_bk.png" alt="">
+            </div>
+            
+    </div>
+    <div class="l-title-line"></div> 
+
+    <!-- 内容区域 -->
+    <div class="books-container  container">
+        
+        <div class="row price_div">
+            
+            <div class="card act_card large z-depth-2 col s8 offset-s2  vip_active_card">
+                <!-- <div class="card-image">
+                                            <img src="/static/img/other/act_card_bk.png">
+                                           <span class="card-title text-center black-text">课程兑换</span>
+                </div> -->
+                <div class="card-content">
+                    <p>VIP会员激活</p>
+                </div>
+                <form method ="Post" action="/vipactive">
+                    <div class="input-field actpage_input col s10 offset-s1 ">
+                        <input
+                        name='vip_code'
+                        onkeyup="value=value.replace(/[^\d]/g,'')"
+                        pattern="[0-9]{6}"
+                        id="actcode2"
+                        type="text"
+                        class="validate text-center "
+                        title="请输入6位数字VIP激活码"
+                        data-length="6"
+                        />
+                        <label class="active text-center " for="actcode2">
+                            <!-- 用flash做错误提示 -->
+                            {% with messages = get_flashed_messages(category_filter=["vipcode_error"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <i class='black-text text-darken-1' >{{ message }}</i>
+                                {% endfor %}
+                            {% else %}
+                                请输入6位数字VIP激活码(可在店铺获得VIP激活码)
+                            {% endif %}
+                        {% endwith %}
+                    </label>
+                    <a href="">获得vip兑换码</a>
+                </div>
+                <div class="card-action actpage_card_action">
+                    <button class="btn  green lighten-1 z-depth-0 waves-effect waves-brown waves-ripple actpage_submit"  type="submit">确认兑换</button>
+                    
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{%endblock%}

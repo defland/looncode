@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+
+{%block title%} {{course_data.course_name}} - 全网精选{{course_data.course_count}}门课共{{course_data.course_size}}G资料 {%endblock%}
+
+
+{% block contents %}
+    
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+
+<div class="container-fluid course_info_centents">
+    
+
+
+
+
+
+<!-- 顶部的标题组件 -->
+    
+    <div class="container-fluid course_info_nav">
+    
+        {# 预留 #}
+        <div class="l-user-tools row">
+            <div class="container">
+                <!-- pass -->
+            </div>
+
+            <div class="col s12"></div>
+        </div>
+
+        {# 课程信息，操作区域 #}
+        {{ md.course_sub_title(
+            course_id=course_data.course_id,
+            course_is_free = course_data.course_is_free,
+            course_name=course_data.course_name,
+            img_url=course_data.course_img,
+            course_category=course_data.course_category,
+            course_count=course_data.course_count,
+            course_passwd=passwd_dict,
+            course_size=course_data.course_size,
+            course_read_count = course_data.course_read_count
+        )}}
+
+        {# 背景 #}
+        <div class="course_info_nav_bk">
+            <img class="nav_bk_img" src="/static/img/other/homepage_bk.png" alt="">
+        </div>
+
+    </div>
+
+
+    
+
+
+    {# 这里是课程表格的组件 #}
+    <div class="l-excel row">
+        
+        <div class="container-fluid">
+                
+
+            <table class="highlight bordered">
+                <thead>
+                    <tr>
+                        <th>|</th>
+                        <th>课程名称</th>
+                        <th>内容包含</th>
+                        <th>更新日期</th>
+                        <th>资源链接</th>
+                        <th>资源大小</th>
+                        <th>提取密码</th>
+                    </tr>    
+                </thead>
+                <tbody>
+                    {# 需要填充的地方 #}
+                    {%for i in course_data.course_data %}
+                    <tr>
+                        <td class="update_time" >{{loop.index}}</td>
+                        <td class="resouce_name">{{i.resource_name}}</td>
+                        <td> 
+                            <!-- 代表：1：视频，2：视频+源码 3：视频+项目实战 4：书籍 5：源码  -->
+                            {% if i.content_type == 1 %}
+                                <span class="label  tooltipped label-default label-default-tags " data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频</span>
+                            {% elif i.content_type == 2 %}
+                                <span class="label tooltipped label-default label-default-tags"  data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频 + 源码</span>
+                            {% elif i.content_type == 3%}
+                                <span class="label tooltipped  label-default label-default-tags"  data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频 + 项目实战</span>
+                            {% elif i.content_type == 4 %}  
+                                <span class="label  tooltipped  label-default label-default-tags"  data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">书籍</span>
+                            {% elif i.content_type == 5 %}
+                                <span class="label  tooltipped  label-default label-default-tags" data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">源码</span>
+                            {% else  %}
+                                <span class="label tooltipped  label-default label-default-tags" data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频</span>
+                            {%endif%}
+                        </td>
+                        <td class="update_time">{{i.update_time}}</td>
+                        <td><a target="_blank" href="{{i.resource_addr}}">{{i.resource_addr}}</a></td>
+                        <td class="update_time" >{{i.resource_size}} G</td>
+                        <td>
+                            {% if passwd_dict %}
+                                <code class='code-passwd'> {{ passwd_dict.get(i.resource_id) }}  </code>
+                            {% elif member_free  %}
+                                <a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="/login" >会员登录可见</a>
+                            {% else %} 
+                                <a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="#act_modal" >显示提取密码</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                    <!-- 所有课程打包转存功能 -->
+                    
+                    <tr>
+                        <td class = "update_time" >all</td>
+                        <td >[ALL].所有课程打包一次转存,空间占较多，建议选择个保存（近期百度云政策调整，超大文件分享容易被和谐，如此链接无效请私聊转存）</td>
+                        <td class = "update_time"><span class="label tooltipped  label-default label-default-tags" >汇总</span></td>
+                        <td class = "update_time" >-</td>
+                        <td><a target="_blank" href="{{course_data.course_share_url}}">{{course_data.course_share_url}}</a></td>
+                        <td class = "update_time" >{{course_data.course_size}} G</td>
+                        {%if passwd_dict %}
+                            <td><code class='code-passwd'>{{course_data.course_share_passwd}}</code></td>
+                        {% elif member_free  %}
+                            <td><a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="/login" >会员登录可见</a></td>
+                        {%else%}
+                            <td><a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="#act_modal" >显示提取密码</a><td>
+                        {%endif%}
+                    </tr>
+
+                   
+                    <!-- 提示用户内容 -->
+                    <tr>
+                        <td></td>
+                        <td class = "update_time"><span>tips：更多优质课程将不定期上传更新.凭兑换码可永久享受更新内容</span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>    
+
+    {# 这里是弹出层，输入购买验证码 #}
+    <!-- modal内容，输入兑换码 -->
+    <div class="remodal" data-remodal-id="act_modal">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        <!-- 兑换成功的提示 + 兑换时候的表单组，通过是否有passwd_dict来切换 -->
+        {% if passwd_dict %} 
+            <h5>恭喜您兑换成功</h5>
+            <p>
+                祝您事业有成,步步高升 <a href="https://shop131223524.taobao.com">前往小店购买更多课程。</a>
+            </p>
+            <br>
+            <button type="submit" data-remodal-action="confirm" class="remodal-confirm">确认</button>
+
+        {% else %} 
+            <h5>输入您的兑换码</h5>
+            <p>
+                输入兑换码获取提取密码,没有兑换码？<a href="https://shop131223524.taobao.com">前往小店购买。</a>
+            </p>
+            <br>
+            <form method="POST" >
+                <!-- 这里输入兑换码 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <!-- 输入input -->
+                        <input name='key' onkeyup="value=value.replace(/[^\d]/g,'')" pattern="[0-9]{4}"   id="first_name2" type="text" class="validate text-center" title="请输入4位数字兑换码">
+                        <label class="active text-center " for="first_name2">请输入4位数字兑换码</label>
+                        <!-- 新版input -->
+
+                        {% if get_flashed_messages() %}
+                        <div class="alert alert-danger" role="alert">兑换失败，您输入的兑换码错误，请重新输入,或请联系客服获取帮助~</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <button class="btn actcode_submit  green lighten-1 z-depth-0 waves-effect waves-brown waves-ripple " type="submit"  > 提交验证 </button>
+            </form>
+
+        {% endif %}
+
+        
+    </div>
+
+    <!-- <a href="#" data-activates="slide-out" class="btn button-collapse">Side nav demo</a> -->
+
+    
+    <!-- 消息闪现 -->
+<!--     {% for message in get_flashed_messages() %}
+        {{message}}
+        <a class="btn" onclick="Materialize.toast('flash: {{message}}', 4000)">Toast!</a>
+    {%endfor%} -->
+
+    
+    <!-- 开发信息展示 -->
+    {%if dev_data['flag']%}
+    <div class="container l-right-contents">  
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>课程数据：<br> </strong>
+             {{course_data}}<br>
+             <strong>密码字典：<br> </strong>
+             {{passwd_dict}}
+
+        </div>
+    </div>    
+    {%endif%}
+    
+    <!-- 前往店铺购买弹窗 -->
+    <ul id="slide-out" class="side-nav">
+        <li><div class="user-view">
+            <div class="background">
+                <img src="/static/img/other/active_course_bk.png">
+            </div>
+            <a href="#!user"><img class="circle" src="/static/img/other/tips.png"></a>
+<!--             <a href="#!name"><span class="white-text name">  -   </span></a>
+ -->            <a href="#!email"><span class="white-text"> - 温馨提示 </span></a>
+           <!--  <a href="#!name"><span class="white-text name">  -   </span></a> -->
+
+        </div></li>
+        <li><a class="subheader">学习步骤</a></li>
+        <li><a href="#!"><i class="material-icons">1</i>查看您需要的课程</a></li>
+        <li><a href="#"><i class="material-icons">2</i>前往店铺购买此课程，获取课程兑换码</a></li>
+        <li><a href="#!"><i class="material-icons">3</i>在本站兑换课程，获取资源开始学习</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">操作</a></li>
+        <li><a class="waves-effect blue-text text-darken-2 " href="https://shop131223524.taobao.com/search.htm?spm=a1z10.1-c-s.w5002-17279339701.1.37bb268eUBelIO&search=y">去电脑版店铺</a></li>
+        <li><a class="waves-effect blue-text text-darken-2 " href="http://shop131223524.m.taobao.com">前往移动端店铺</a></li>
+        <li><img class = "taobao_qc" src="/static/img/other/taobao_qc.png"></a></li>
+    </ul>
+    
+    
+</div>
+{% endblock %}
+

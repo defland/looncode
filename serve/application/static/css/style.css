@@ -1,0 +1,1014 @@
+html{
+    text-decoration:none!important;
+    top: 0px;
+    bottom: 0px;
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 25px;
+    /* margin: 0px 0px 120px 120px !important; */
+    
+}
+body{
+    
+    font-family: 'Droid Sans Fallback','PingFang SC','Microsoft YaHei','Hiragino Sans GB','Heiti SC','WenQuanYi Micro Hei',sans-serif!important;
+    top: 0px;
+    bottom: 0px;
+    margin: 0px;  
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 25px;
+    margin: 0px 0px 0px 120px !important;
+    
+
+}
+
+h1,h2,h3,h4,h5{
+    
+    top: 0px!important;
+    bottom: 0px!important;
+    line-height: 1.2!important;
+    text-transform:capitalize;
+}
+
+a {
+    text-decoration:none!important;
+    text-transform:none!important;
+
+}
+
+a:link,a:visited,a:hover,a:active {
+    text-decoration:none!important;
+}
+
+
+/* 强制覆盖掉第三方的样式 */
+.card .card-image img {
+/*     width: auto!important;
+    height: 100%!important; */
+}
+table.bordered > thead > tr, table.bordered > tbody > tr {
+    border-bottom: 1px solid #f3f3f4;
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: transparent;
+    color: #ee6e73;
+    font-weight: bolder;
+    color: #333!important;
+}
+.tabs .indicator {
+    background-color: #999;
+}
+th {
+
+    font-size: 12px;
+    color: #999;
+    font-weight: 300;
+}
+td {
+
+    font-size: 14px;
+    color: #424E6C;
+
+}
+.alert-danger {
+
+    font-size: 12px;
+}
+.alert {
+    padding: 8px;
+}
+
+.waves-effect.waves-brown .waves-ripple {
+     /* The alpha value allows the text and background color
+     of the button to still show through. */
+      background-color: rgba(12, 12, 11, 0.73);
+}
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    max-height: 58%!important;
+    overflow: hidden;
+}
+
+.size_chip{
+
+    display: inline-block;
+    float: right;
+    height: 24px;
+    font-size: 10px;
+    line-height: 24px;
+    color: #666666;
+
+}
+.card .card-action {
+
+    padding-right: 10px;
+}
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #666;
+  -webkit-box-shadow: 0 1px 0 0 #666;
+          box-shadow: 0 1px 0 0 #666;
+}
+input[type=text].valid:not(.browser-default){
+
+    border-bottom: 1px solid #666;
+    -webkit-box-shadow: 0 1px 0 0 #666;
+    box-shadow: 0 1px 0 0 #666;
+}
+
+.page-footer {
+    position: relative;
+    bottom: 0px;
+    padding-top: 0px;
+
+    background-color: #fefefe;
+    font-size: 12px;
+    color: #666!important ;
+}
+.footer-copyright {
+    color: #666!important ;
+}
+.footer-copyright a {
+    color: #333!important;
+
+}
+.card .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+}
+.label-default-tags {
+    
+    background-color: #f2f2f2;
+    font-weight: 200;
+    color: #666;
+
+}
+.code-passwd {
+
+    padding: 6px 16px;
+    font-size: 110%;
+    font-weight: 500;
+    color: #c7254e;
+    /* color: #fff; */
+    background-color: #f2f2f2;
+    border-radius: 4px;
+}
+
+
+.update_time{
+
+    font-size: 12px;
+    color: #999;
+}
+.resouce_name{
+    
+    font-weight: 400;
+
+}
+
+/* 已兑换课程 */
+
+.is_active_course_nav{
+
+
+}
+
+.user-view{
+    
+    height: 180px;
+    background: rgba(45, 45, 45, 0.86);
+
+}
+.user-view img{
+    
+    height: 300px;
+
+}
+.chip span{
+    
+    font-size: 10px;
+    line-height: 22px;
+    color: #999;
+
+}
+.is_active_text{
+    
+    font-size: 10px;
+
+}
+
+.course_span{
+    
+    font-size: 14px;
+    color: #666;
+
+}
+
+/* PC端导航栏 */
+
+.l-left-nav{
+
+    position: fixed;
+    /* background: transparent linear-gradient(80deg, #0b4182 1%, #1a78cf 99%) repeat scroll 0% 0%; */
+    background: transparent linear-gradient(80deg, #333 1%, #4A4A4A 99%) repeat scroll 0% 0%;
+    left: 0px;
+    text-align: center;
+    width: 120px;
+    height: 100%;
+    z-index: 8888;
+    top: 0px!important;
+    bottom: 0px!important;
+
+
+}
+.l-left-nav img{
+
+    max-width: 120px;
+    display: block;
+    margin: 32px auto;
+    padding-left: 8px;
+}
+.l-left-nav ul {
+
+    list-style: none;
+    color: #fff;
+    margin: 0px 0px;
+    padding: 0px;
+}
+.l-left-nav ul li{
+    
+    display: block;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+
+}
+.l-left-nav ul li img{
+
+    max-width: 28px;
+    display: block;
+    margin: 6px auto;
+    padding: 0px;
+
+}
+.l-left-nav a{
+
+    display: block;
+    color: #fff;
+    font-size: 14px;
+
+}
+.l-left-nav::after{
+
+　　content: "";
+
+　　position: absolute;
+
+　　left: -10px;
+
+　　top: -10px;
+
+　　right: -10px;
+
+　　bottom: -10px;
+
+}
+.l-left-nav p{
+
+    font-size: 10px;
+
+}
+
+/* ==内容区域== */
+/* 标题 */
+
+
+
+/* 右侧内容区域样式 */
+.l-right-contents{
+    
+
+    min-height: 970px;
+    background-color: rgba(231, 76, 60,0.01);
+    padding: 0px;
+}
+.nav_bk{
+    
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    text-align: center;
+    padding: 0px;
+
+}
+.nav_bk h5 {
+    
+    font-weight: 200;
+    padding-top: 40px;
+    font-size: 30px;
+    
+}
+.nav_bk p {
+    
+    font-weight: 200;
+}
+.nav_bk_bk{
+    
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+
+}
+.act_links{
+    
+    font-size: 12px;
+
+
+}
+
+
+.nav_bk_img{
+
+    display: block;
+    z-index: -10;
+
+}
+
+
+/* === course_info==== */
+
+.course_info_centents{
+
+    min-height: 970px;
+    margin-bottom: 180px;
+}
+
+/* 一级页面，标题组件样式 */
+.l-title{
+
+    height: 160px;
+    /* background-color: yellow; */
+    text-align: center;
+}
+.l-title h1{
+
+    padding-top: 28px;
+    font-size: 30px;
+}
+
+.l-title-line{
+
+    height: 1px;
+    background-color: #EDF0F2;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* usr-tools */
+.l-user-tools{
+        
+    height: 40px;
+    
+}
+
+/* 2级页面，标题组件样式 */
+
+.l-sub-title{
+    
+    
+}
+.l-sub-title-left{
+    
+
+
+}
+.lstl-img{
+    
+    text-align: center;
+}
+.l-sub-title-left  img{
+    
+    max-width: 50px;
+    height: 50px;
+    border-radius: 99px;
+    margin-left: 2em;
+    margin-top: 1.0em;
+
+}
+.l-sub-title-left > h1,h2,h3,h4,h5{
+    
+    font-weight: 600;
+    color: #333;
+
+}
+
+.lstl-control{
+
+    margin-top: 30px;
+    margin-right: 30px;
+    float: right;
+}
+
+.tooltipped{
+
+    background-color: #fff!important;
+}
+
+/* 课程导航 */
+
+.l-content-nav{
+    
+    /* margin-left: 120px; */
+    max-width: 1400px;
+    font-size: 14px;
+}
+
+.l-content-nav a{
+    
+    font-size: 12px;
+    color: #666!important;
+    text-align: 
+}
+.l-content-nav-tab > ul > li >  a {
+    
+    padding: 0px 10px!important;
+    font-size: 14px!important;
+
+}
+
+/* 课程内容区域 */
+.course_info_nav{
+
+    position: relative;
+    width: 100%;
+    height: 148px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+
+}
+
+.course_info_nav_bk{
+    
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+
+}
+.nav_bk_img{
+
+    display: block;
+    z-index: -10;
+
+}
+
+
+.l-content-nav-tab{
+
+    margin-bottom: 20px;
+    background-color: rgba(231, 76, 60,0.00)
+}
+.l-content-nav-tab ul{
+
+    background-color: rgba(231, 76, 60,0.00)
+}
+.is_active-label{
+    
+    position: absolute;
+    z-index: 999;
+    right: 6px;
+    top: 6px;
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.active_btn{
+    
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    position: absolute;
+
+    right: 76px;
+    top: 160px;
+    
+
+}
+.active_btn img{
+    
+    display: block;
+    margin: 2px auto;
+    width: 18px;
+
+}
+
+
+/* ========act.html==== */
+/* 激活码填写区域 */
+
+
+.act{
+
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+
+
+}
+.act_bk_bk{
+
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+
+}
+
+.act_bk_img{
+
+    display: block;
+    z-index: -10;
+
+}
+
+.act_card{
+    
+    padding: 0!important;
+    margin-top: 4rem;
+}
+
+.card.large {
+    height: 480px;
+}
+.actpage_input{
+    
+    margin-top: 10%;
+}
+
+.actpage_card_action{
+    text-align:center;
+}
+.actpage_submit{
+
+    height: 46px;
+    line-height: 46px;
+    text-align:center;
+}
+
+
+/* sidenav */
+.taobao_qc{
+
+    max-height:120px;
+    margin-left: 30px;
+}
+.validate{
+
+    font-size: 32px!important;
+    line-height: 1.8;
+    height: 3.6rem!important;
+}
+
+.actcode_submit{
+    
+    height: 50px;
+    width: 98%;
+    /* background-color: #52AF52; */
+}
+
+/* welcome页面 */
+
+.welcome-bk{
+    background: url('../img/welcome.png') no-repeat fixed center ;
+    height: 900px;
+    width: 100%;
+    background-size:100%;
+}
+
+
+/* books页面 */
+.books-container{
+    
+    min-height: 100vh;
+    /* background-color: rgba(239, 241, 245, 0.32);  */
+   /*  background-color: rgba(231, 76, 60,0.01); */
+/*     background: url('../img/books/bookbk.jpg') no-repeat fixed top; */
+
+}
+
+.books-card-panel{
+    /* box-shadow: 0px 1px 1px #c1c1c1; */
+    box-shadow: none;
+    
+    height: 420px;
+    background-color: rgba(239, 241, 245, 0.0); 
+}
+.books-card-panel h1,h2,h3,h4{
+     
+     color: #555;
+     font-size: 15px;
+     font-weight: 300;
+}
+.books-card-panel h5{
+     
+     color: #333;
+     font-size: 14px;
+     font-weight: 500;
+}
+.books_cate{
+    
+    display: inline-block;
+
+
+}
+.books_more{
+    
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+    margin: 5px 8px;
+    
+}
+.books_list{
+
+    float: left;
+    width: 108px;
+    font-size: 12px;
+    margin: 0 3.4% 2% 0;
+    color: #666;
+    height: 328px;
+    line-height: 20px;
+}
+.books_list a{
+
+    color: #666;
+
+}
+.books_list a:hover{
+
+    color: rgba(231, 76, 60, 1.00)!important;
+
+}
+.books_list a:hover h5{
+
+    color: rgba(231, 76, 60, 1.00)!important;
+
+}
+.books_list a:hover img{
+
+    box-shadow: 1px 4px 7px rgba(0,0,0,.35);
+    -webkit-transform:translateY(-5px);
+    -moz-transform:translateY(-5px);
+    -ms-transform:translateY(-5px);
+    -o-transform:translateY(-5px);
+    transform:translateY(-5px);
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+
+.books_img{
+    
+    max-width: 108px;
+    max-height: 142px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.25);
+    border-radius: 3px;
+    display: block;
+    margin: 8px auto;
+
+}
+.books_read_count{
+    
+    display: block;
+    margin: 0px 2px 2px 0px;
+    font-size: 10px;
+}
+.books-chip{
+    
+    display: inline-block;
+    font-size: 10px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 10px;
+    margin-top: 4px;
+    color: rgba(231, 76, 60, 0.6);
+    background-color: #f2f2f2; 
+
+}
+.books_tabs ul{
+    
+    background-color: rgba(239, 241, 245, 0.0);
+    margin-left: 30px;
+   
+}
+.books_tabs ul li a{
+
+    color: #666!important;
+    font-size: 12px;
+}
+.books_tabs ul li a:link, a:visited, a:hover, a:active{
+
+    font-size: 12px;
+}
+
+/* base.html */
+.user_login{
+    
+/*     background-color:#000; */
+    height: 2px;
+}
+.login_links{
+    
+
+}
+.login_links a{
+    
+    display: block;
+    float: right;
+    position: relative;
+    line-height: 44px;
+    font-size: 12px;
+    margin: 0px 20px;
+    color: #333;
+
+}
+
+.login_register_modal{
+    
+    border-top:4px solid rgba(231, 76, 60, 0.98);
+    border-bottom:2px solid rgba(231, 76, 60, 0.8);
+    border-radius: 2px;
+}
+.login_register_modal h5{
+    
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+.login_register_form{
+
+    color: #333;
+
+}
+input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #666!important;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #666!important;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #666!important;
+}
+input::-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #666!important;
+}
+.register_div ,.login_div{
+    
+    padding: 6px 3rem!important;
+
+}
+.register_div {
+
+    border-right: 1px solid #f2f2f2;
+}
+.register_div h5 {
+
+
+}
+.login_register_input{
+    
+    width: 80%;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.login_register_btn{
+
+    float: right;
+    background-color: rgba(80, 167, 80, 1.00);
+}
+.login_btn {
+
+    background-color: rgba(52, 152, 219,1.0);
+}
+ .supercode_links{
+    
+    display: inline-block;
+    font-size: 12px;
+    color: rgba(0, 145, 225, 1.00);
+    text-align: left;
+    padding: 0px!important;
+    line-height: 3rem;
+ }
+ .user_remember_label{
+    color: #666;
+    font-weight: 300;
+    padding-left: 24px;
+    height: 14px;
+    line-height: 18px;
+ }
+[type="checkbox"].filled-in:checked+label:after {
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #666666;
+    background-color: #666666;
+    z-index: 0;
+
+}
+ /* login.html */
+.login-container{
+
+    background-color: rgba(255,255,255,0.96);
+    height: 100vh;
+
+}
+ .login_card{
+    
+    border-top:4px solid rgba(231, 76, 60, 0.98);
+    border-bottom:2px solid rgba(231, 76, 60, 0.8);
+    padding-top: 8rem!important;
+    margin-top: 10rem  !important;
+ } 
+ .register_login_error{
+    
+    color: rgba(231, 76, 60, 0.98);
+    font-size: 12px;
+    font-weight: 200;
+    background-color: rgba(244,244,244,0.99);
+    border-radius: 2px;
+ }
+ .login_links i{
+    
+    line-height: 10px;
+ }
+
+ /* 我的个人中心 */
+.vip_img{
+    
+    display: inline-block;
+    max-width: 30px;
+    max-height: 22px!important;
+
+}
+.vip_span{
+    
+    display: inline!important;
+    font-size: 12px!important;
+}
+.side-nav .user-view .name, .side-nav .userView .name{
+
+    margin-top: 10px;
+    font-weight: 500;
+
+}
+.side-nav a{
+
+    font-size: 14px;
+    font-weight: 400!important;
+}
+.my-glyphicon{
+    
+    font-size: 14px;
+    top: -5px;
+}
+.side-nav li>a>i, .side-nav li>a>[class^="mdi-"], .side-nav li>a li>a>[class*="mdi-"], .side-nav li>a>i.material-icons {
+    float: left;
+    height: 48px;
+    line-height: 48px;
+    margin: 0 16px 0 0;
+    width: 24px;
+    color: rgba(0,0,0,0.54);
+}
+
+/* 价格方案页面 */
+.price_div{
+
+    margin-top: 20px;
+}
+.price_content{
+    font-size: 12px;
+    color: #666;
+}
+.vip_title{
+
+/*     background-image: linear-gradient(to right,#383838,#414141);
+    background-color: rgba(56, 56, 56, 1.00); */
+}
+.free_price{
+    
+    font-weight: 400;
+}
+.vip_price{
+
+    font-weight: 400;
+}
+.allproduct{
+
+    margin: 15px auto;
+    padding-bottom: 10px;
+}
+.allproduct i{
+
+    font-size: 40px;
+
+}
+.allproduct p{
+
+    font-size: 12px;
+    line-height: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+.vip_price_img{
+
+    display: inline-block;
+    max-width: 30px;
+    max-height: 26px!important;
+    top: 1px;
+    margin: 0px;
+    padding-bottom: 5px;
+    padding-left: 2px;
+}
+
+.price_action a{
+    
+    color: #444 !important;
+    font-size: 14px;
+    margin: 1px 1px!important;
+}
+.price_button{
+    
+    height: 35px;
+    margin: 4px 2px;
+}
+
+/* vip兑换页面 */
+.vip_active_card{
+   
+    border-top:4px solid rgba(231, 76, 60, 0.98);
+    border-bottom:2px solid rgba(231, 76, 60, 0.8);
+    height: 400px!important;
+}
+.vip_active_card card-image{
+
+    height: 10%;
+}
+.vip_active_card card-image{
+
+    height: 90%;
+}
+.price_card{
+
+    border-top:4px solid rgba(231, 76, 60, 0.78);
+}
+
+/* base.html */
+.store_links{
+    
+    position: absolute;
+    bottom: 15px;
+    left: 26px;
+    height: 24px;
+    border: 1px;
+    width: 58%;
+    padding: 2px;
+    background-color: rgba(84, 84, 84, 0.55)!important;
+    line-height: 12px;
+    font-size: 10px;
+}

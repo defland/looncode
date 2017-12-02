@@ -1,0 +1,97 @@
+{% extends "/mobile/m_base.html" %}
+
+{% block title%} 课程兑换 - 懒人编程(looncode.com) {%endblock%}
+
+
+
+{% block contents %}
+    
+    <div class="actpage_container">
+        
+        <!-- 图片 -->
+        
+        <div class="actpage_img">
+             <img src="../../static/img/other/act_card_bk.png" alt="" />
+        </div>
+        
+        <!-- 表单 -->
+        <div class="actpage_form">
+            <form  method="POST" action="/m/act" >
+                <h1>课程兑换</h1>
+                <p>
+                输入4位数字兑换码兑换课程,没有兑换码？<a href="https://shop131223524.taobao.com">前往小店购买。</a>
+                </p>
+                <div class="act_input actpage_form_input">
+
+                    
+                    {% with messages = get_flashed_messages(category_filter=["act_error"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <input
+                                    name='act_code'
+                                    onkeyup="value=value.replace(/[^\d]/g,'')"
+                                    pattern="[0-9]{4}"
+                                    id="actcode2"
+                                    type="text"
+                                    class="am-form-field am-round "
+                                    title="请输入4位数字兑换码"
+                                    data-length="4"
+                                    placeholder="{{message}}"
+                                    ng-style="color: #333;"
+                            />
+
+                            {% endfor %}
+                        {% else %}
+                            <input
+                                name='act_code'
+                                onkeyup="value=value.replace(/[^\d]/g,'')"
+                                pattern="[0-9]{4}"
+                                id="actcode2"
+                                type="text"
+                                class="am-form-field am-round "
+                                title="请输入4位数字兑换码"
+                                data-length="4"
+                                placeholder="输入4位兑换码"
+                            />
+                        {% endif %}
+
+                    {% endwith %}
+
+
+                </div>
+                <div class="act_btn ">
+                    <button type="submit" class="am-btn am-btn-success am-round actpage_form_btn ">兑换课程</button>
+                </div>
+                
+                
+            </form>
+        </div>
+        
+    </div>
+
+    {# 尾部导航 #}
+    <div class="footnav">
+        
+        <ul class="footnav_ul">
+            <li class="footnav_li">
+                <a href="/m/course">
+                    <img class="footnav_img"  src="../static/img/nav/mobile_course_b.png" alt="">
+                    <span class="footnav_span " >课程库</span>
+                </a></li>
+            <li class="footnav_li">   
+                <a href="/m/act">
+                    <img class="footnav_img" src="../static/img/nav/mobile_act_r.png" alt="">
+                    <span class="footnav_span select_span" >兑换课程</span>
+                </a> 
+            </li >
+            <li class="footnav_li">
+                <a href="/m/my">
+                    <img class="footnav_img" src="../static/img/nav/mobile_my_b.png" alt="">
+                    <span class="footnav_span " >我的</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+{% endblock%}

@@ -1,0 +1,104 @@
+{% extends "/mobile/m_base.html" %}
+
+{% block title%} 我的 - 懒人编程(looncode.com) {%endblock%}
+
+
+
+{% block contents %}
+
+    <!-- 已兑换课程 -->
+    <div class="mypage_is_active">
+        <h3>已兑换课程</h3>
+        <ul class="mypage_is_active_ul">
+            {%if has_active_course == True%}
+                {% for cate in category %} 
+                    {% if cate.category_active_course %}
+                        {% for course in cate.category_active_course %} 
+                            <li class="mypage_is_active_li" >
+                                <a class=" " href="/m/course/{{course.course_id}}" >
+                                    <i class="am-icon-bookmark"></i>
+                                    {{course.course_name}}
+                                    <i class="am-icon-angle-right pull-right-i"></i>
+                                
+                                </a>
+                            </li>
+                        {%endfor%}
+                    {%endif%}
+                {%endfor%}
+                <li class="mypage_is_active_li" >
+                    <a class=" " href="/books" >
+                        <i class="am-icon-laptop"></i>
+                        PC端书籍库访问
+                        <i class="am-icon-angle-right pull-right-i"></i>
+                        
+                    </a>
+                </li>
+                <li class="mypage_is_active_li" >
+                    <a class=" " href="" >
+                        <i class="am-icon-shopping-cart"></i>
+                        前往懒人小店获取更多兑换码
+                        <i class="am-icon-angle-right pull-right-i"></i>
+                        
+                    </a>
+                </li>
+            {%else%}
+                <li class="mypage_is_active_li" >
+                    <a class=" " href="" >
+                        <i class="am-icon-bookmark"></i>
+                        暂无已兑换课程
+                    </a>
+                </li>
+                <li class="mypage_is_active_li" >
+                    <a class=" " href="/books" >
+                        <i class="am-icon-laptop"></i>
+                        PC端书籍库访问
+                        <i class="am-icon-angle-right pull-right-i"></i>
+                        
+                    </a>
+                </li>
+                <li class="mypage_is_active_li" >
+                    <a class=" " href="http://shop131223524.m.taobao.com" >
+                        <i class="am-icon-shopping-cart"></i>
+                        前往店铺购买兑换码
+                        <i class="am-icon-angle-right pull-right-i"></i>
+                        
+                    </a>
+                </li>
+
+            {%endif%} 
+
+        </ul>
+
+    </div>
+    <div class="my_page_links">
+        
+    </div>
+
+    <!-- 其他链接 -->
+
+    {# 尾部导航 #}
+    <div class="footnav">
+        
+        <ul class="footnav_ul">
+            <li class="footnav_li">
+                <a href="/m/course">
+                    <img class="footnav_img"  src="../static/img/nav/mobile_course_b.png" alt="">
+                    <span class="footnav_span " >课程库</span>
+                </a></li>
+            <li class="footnav_li">   
+                <a href="/m/act">
+                    <img class="footnav_img" src="../static/img/nav/mobile_act_b.png" alt="">
+                    <span class="footnav_span " >兑换课程</span>
+                </a>
+            </li >
+            <li class="footnav_li">
+                <a href="/m/my">
+                    <img class="footnav_img" src="../static/img/nav/mobile_my_r.png" alt="">
+                    <span class="footnav_span  select_span" >我的</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+{% endblock%}

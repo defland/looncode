@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %} 注册 | 登录 {% endblock %}
+
+
+{% block contents %}
+
+
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+    
+
+
+    <div class="container-fluid login-container">
+        <div class="row">
+            <div class="card login_card large z-depth-2 col s6 offset-s3 ">
+                <div class="register_div col s6">
+                    <h5>用户注册</h5>
+                    <form action="/register" method="POST" class="login_register_form">
+                        
+                        <input placeholder="请输入用户名" id="register_username" type="text" class="login_register_input" name="register_username">
+                        
+                        <input placeholder="设置您的密码(6位以上)" id="register_password" type="password" class="login_register_input hideShowPassword-hidden login-field" name="register_password" pattern=".{6,}" >
+                        <!--                     <div class="my-toggle-class hideShowPassword-toggle-show">Show</div> -->
+                        <input placeholder="VIP会员激活码(选填)" id="register_vipcode" type="text" class="login_register_input" name="register_vipcode">
+                        
+                        {# 错误提示区域 #}
+                        {% with messages = get_flashed_messages(category_filter=["register_error"]) %}
+                            {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="row">
+                                                <div class="chip register_login_error">{{message}} <i class="close material-icons">close</i> </div>
+                                            </div>
+                                        {% endfor %}
+                                {% else %}
+                    
+                            {% endif %}
+                        {% endwith %}
+                  
+
+                        <div class="row">
+                            <a href="/membership" class=" col s6 supercode_links ">了解VIP会员特权</a>
+                            <button class="waves-effect  z-depth-0 waves-light btn login_register_btn login_btn " type="submit">立即注册</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="login_div col s6"  >
+                    <h5>登录</h5>
+
+                    <form action="/login" method="POST" class="login_register_form">
+                        <input placeholder="请输入用户名" id="first_name" type="text" class="login_register_input" name="login_username">
+                        
+                        <input  placeholder="请输入您的密码" id="password" type="password" class="login_register_input" name="login_password">
+                        {# 错误提示区域 #}
+                        {% with messages = get_flashed_messages(category_filter=["login_error"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="row">
+                                    <div class="chip register_login_error">{{message}}<i class="close material-icons">close</i> </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            
+                        {% endif %}
+                        {% endwith %}
+                        <div class="row">
+                            <p>
+                                <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" name='remember_me_flag'>
+                                <label for="filled-in-box" class="user_remember_label">记住登录状态</label>
+                            </p>
+                            <button  class="waves-effect z-depth-0 waves-light btn login_register_btn" type="submit">登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 背景图片 -->
+    <div class="act_bk_bk">
+        <img class="act_bk_img" src="/static/img/other/act_bk.png" alt="">
+    </div>
+
+{% endblock %}

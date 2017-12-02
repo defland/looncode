@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{%block title%} 书籍库 {%endblock%}
+
+
+{% block contents %}
+    
+
+
+
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+    
+    <div class="nav_bk">
+            <!-- 注册登录入口和登录模态窗口 -->
+            {{md.login_panel(current_user=current_user,current_url='/books',next_url='/books')}}
+            <h5>懒人编程 书籍库</h5>
+            <p>为中华码农之崛起而读书。</p>
+            <div class="nav_bk_bk">
+                <img class="nav_bk_img" src="/static/img/other/homepage_bk.png" alt="">
+            </div>
+            
+    </div>
+    <div class="l-title-line"></div> 
+    <div class="books-container  container-fluid">
+        {# 书籍分类 #}
+        {# 这里是分类菜单，从数据库读取 #}
+       
+        <div class="col s12 books_tabs">
+            <ul class="tabs swipeable  ">
+                {% for cate in all_books_data %}
+                    <li class="tab ">
+                        <a class="{%if loop.first %} active {%endif%}" href="#{{cate.category_id}}">{{cate.category_name}}</a>
+                    </li>
+                {% endfor %}
+ 
+            </ul>
+ 
+        </div>
+
+
+        {# 书籍内容 #}
+        <div class="container-fluid">
+            
+            {%for cate in all_books_data%}
+            {# 内容卡片 #}
+            <div class="card-panel books-card-panel col s12 " id='{{cate.category_id}}'>
+                
+                {# 书单信息，这里就需要循环了 #}
+                {% for bookslist in cate.category_bookslist %}
+                <div class="container-fluid">
+
+                    <i class="material-icons"><span class="glyphicon glyphicon-book " aria-hidden="true"></span></i>
+                    <h4 class="books_cate">
+                        <span class="card-title">{{bookslist.bookslist_name}}</span>
+                    </h4>
+                    <span class="books_more" href="#">{{bookslist.bookslist_count}}本</span>
+                    <ul>
+                        {# 书本，需要循环 #}
+                        {%for book in bookslist.bookslist_book%}
+                        <li class="books_list">
+                            <a href="javascript:void(0);">
+                                <img src="{{book.book_img_url}}" alt="" class="books_img">
+                                <h5 class="books_name">{{book.book_name}}</h5>
+                                <span class="books_description">{{book.book_desc}}</span>
+                            </a>
+                            <div class="books_operation">
+                                <span class="books_read_count">
+                                    评分{{book.book_mark}}
+                                    <a href="{{book.book_buy_url}}">买正版 ></a>
+                                </span>
+                                <span class="books_hot"><a href=""></span></a>
+                                
+                                {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
+                                    <span class="books_down">
+                                        <a href="{{book.book_download_url}}"><div class="chip books-chip">PDF下载 </div></a>
+                                    
+                                    </span>
+                                {%else%}
+                                    <span class="books_down">
+                                        <a href="#" onclick="Materialize.toast('非VIP会员不支持PDF下载:）', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
+                                    
+                                    </span>       
+                                {%endif%}
+                            </div>
+                        </li>
+                        {%endfor%}
+                    </ul>
+                </div>
+
+                
+                {%endfor%}
+            </div>
+            {%endfor%}
+            {#  #}
+            {# <div class="card-panel books-card-panel col s12 " id='2'>开篇2</div> #}
+        </div>
+
+
+
+    </div>
+    
+    <!-- 非VIP用户提醒弹窗 -->
+    <!-- modal内容，输入兑换码 -->
+    <!-- <div class="remodal books_modal z-depth-2 " data-remodal-id="books_modal">
+        
+        <div class="row">
+             <h5>成为VIP会员</h5>
+            <p>
+                祝您事业有成,步步高升 <a href="https://shop131223524.taobao.com">前往小店购买更多课程。</a>
+            </p>
+            <br>
+            <button type="submit" data-remodal-action="confirm" class="remodal-confirm">确认</button>
+        </div>
+    </div> -->
+
+
+    {# 开发信息 #}
+
+        <!-- 开发信息展示 -->
+    {%if dev_data['flag']%}
+    
+    <div class="container l-right-contents">  
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>开发调试信息：<br> </strong>
+            {{test}}
+        </div>
+    </div>
+    {%endif%}
+
+
+{%endblock%}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{%block title%} 课程兑换 {%endblock%}
+
+
+{% block contents %}
+
+
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+    
+
+    <div class="container-fluid act">
+        
+
+   
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="card act_card large z-depth-2 col s8 offset-s2 ">
+                    <div class="card-image">
+                        <img src="/static/img/other/act_card_bk.png">
+                        <span class="card-title text-center">课程兑换</span>
+                    </div>
+                    <!-- <div class="card-content">
+                        <p>请输入4位数字兑换码，兑换课程，如有疑问请联系客服。</p>
+                    </div> -->
+                        <form method ="Post" action="/act">
+                            <div class="input-field actpage_input col s10 offset-s1 ">
+
+                                <input 
+                                    name='act_code' 
+                                    onkeyup="value=value.replace(/[^\d]/g,'')" 
+                                    pattern="[0-9]{4}"   
+                                    id="actcode2" 
+                                    type="text" 
+                                    class="validate text-center " 
+                                    title="请输入4位数字兑换码"
+                                    data-length="4"
+                                />
+
+                                <label class="active text-center " for="actcode2">
+                                <!-- 用flash做错误提示 -->          
+                                {% with messages = get_flashed_messages(category_filter=["act_error"]) %}
+                                {% if messages %}
+                                        {% for message in messages %}
+                                          <i class='black-text text-darken-1' >{{ message }}</i> 
+                                        {% endfor %}
+                                {% else %}
+                                          请输入4位数字兑换码(查看所需课程包，前往店铺购买获得兑换码)
+                                {% endif %}
+                                {% endwith %}
+
+                                </label>
+                            </div>
+
+
+                            <div class="card-action actpage_card_action">
+                                <button class="btn  green lighten-1 z-depth-0 waves-effect waves-brown waves-ripple actpage_submit"  type="submit">兑换课程</button>
+                            
+                            </div>
+
+                        </form>
+
+
+                </div>
+                
+            </div>
+        </div>
+
+        
+
+     
+
+        <!-- 背景图片 -->
+        <div class="act_bk_bk">
+            <img class="act_bk_img" src="/static/img/other/act_bk.png" alt="">
+        </div> 
+    </div>
+
+
+
+{% endblock %}
+
+
+

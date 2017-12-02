@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title%} 懒人编程 - 全面的编程自学资源库 {%endblock%}
+
+{% block pc_nav%} {{super()}} {%endblock%}
+
+{% block contents %}
+<!-- ==内容区== -->
+
+
+
+    <div class="container-fluid l-right-contents">
+        
+
+        <div class="nav_bk">
+            
+            <!-- 注册登录入口和登录模态窗口 -->
+            {{md.login_panel(current_user=current_user,current_url='/course',next_url='/course')}}
+
+            <h5>懒人编程 课程库</h5>
+            <p>海量课程精心整理,长期更新支持</p>
+            <a href="/act" class="act_links">已有兑换码，点我兑换课程</a>
+            <div class="nav_bk_bk">
+                <img class="nav_bk_img" src="/static/img/other/homepage_bk.png" alt="">
+            </div>
+            
+        </div>
+        <!-- {#         
+        <div class="l-title ">
+            <h1>LEA编程学院 课程库</h1>
+            <p>海量课程资源收集，好课任您挑选</p>
+        </div> 
+        #} -->
+        <!-- 已兑换的课程显示弹窗 触发按钮 -->
+        {# 判断是否有兑换的课程 #}
+        {% if has_active_course %}
+            
+            <!-- 按钮，登录用户之后就隐藏 -->
+            {% if (current_user.is_authenticated) %}
+                
+            {%else%}
+                <a href="#" data-activates="is_active_course_nav" >
+                    <button  title = "d"  type="button" class="btn btn-floating button-collapse z-depth-1  grey darken-1  tooltipped  active_btn"   aria-label="Right Align" data-activates="is_active_course_nav"  data-tooltip="已兑换成功的课程">
+                    <img src="/static/img/other/actvie_btn.png" alt="">
+                    </button>
+                </a>
+            {%endif%}
+
+        {% endif %}
+        <div class="l-title-line"></div> 
+
+
+
+        <div class="l-content">
+            <!-- 课程分类和内容 -->
+            <div class="row l-content-nav">
+                <!-- 导航 -->
+                <div class="col s12 l-content-nav-tab">
+                    <ul class="tabs ">
+
+                        {# 这里是分类菜单，从数据库读取 #}
+                        {% for cour in category %}
+                            <li class="tab">
+                                <a class="{%if loop.first %} active {%endif%}" href="#{{cour['category_id']}}">{{cour.category_name}}</a>
+                            </li>   
+                        {% endfor %}
+
+                    </ul>
+                </div>
+                
+                {# 这里是每个分类地下的课程详情 #}
+                
+                <!-- 单独分类 -->
+                {% for cour in category %}
+                    <div id="{{cour.category_id}}" class="col s12">
+                        {# 一个分类地下的所有课程 #}                        
+                        <!-- 课程卡片 -->
+                        {% for i in cour.category_course %}
+                            <div class="col s12 m3 ">
+                                <div class="card small z-depth-1">
+                                    <div class="card-image">
+                                                                                
+                                        <a class=" waves-effect waves-brown waves-ripple" href="/course/{{i.course_id}}">
+                                        {# 已兑换/限免课程标签 #}
+                                        {%if i.course_is_free %}
+                                        <span class="label label-success is_active-label blue lighten-1">会员免费</span>
+                                        {%elif i.is_active  %}
+                                        <span class="label label-success is_active-label">已兑换</span>
+                                        {%endif%}
+                                            <img src="{{i.course_img}}">
+                                        </a>
+                                   
+                                    </div>
+
+                                    <div class="card-content">
+                                    <a class=" waves-effect waves-brown waves-ripple" class="waves-effect waves-light" href="/course/{{i.course_id}}"><span class="card-title">{{i.course_name}}</span></a>
+                                    </div>
+                                    <div class="card-action">
+                                        <a class="waves-effect waves-brown waves-ripple " href="/course/{{i.course_id}}">
+                                            {{i.course_read_count}}k+查看
+                                        </a>
+                                        {%if i.course_count %}
+                                            <div class="chip size_chip">{{i.course_count}}套课程 </div>
+                                        {%endif%}
+                                        {%if i.course_size %}
+                                            <div class="chip size_chip">共 {{i.course_size}} G</div>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                            </div>
+
+                        {%endfor%}
+
+                    </div>
+                {% endfor%}
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 我的个人中心面板 -->
+    {{md.my_panel(current_user=current_user,category=category)}}
+    
+
+    <!-- 开发信息展示 -->
+    {%if dev_data['flag']%}
+    
+    <div class="container l-right-contents">  
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>开发调试信息：<br> </strong>
+            Push次数: 第 {{dev_data.git['count']}} 次提交 <br>
+            Git版本: {{dev_data.git['version']}} <br>
+            版本信息: {{dev_data.git['commit']}} <br>
+            更新时间: {{dev_data.git['time']}} <br>
+        </div>
+    </div>
+    {%endif%}
+    
+    <!-- 调试数据展示 -->
+    {%if dev_data['flag']%}
+    <div class="container l-right-contents">  
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>页面数据：<br> </strong>
+            <strong>课程数据：<br> </strong>
+            {{category}} <br><br>
+            {{has_active_course}} <br><br>
+            <strong>开发工具数据：<br> </strong>
+            {{dev_data}}<br>
+        </div>
+    </div>
+    {%endif%}
+    
+{#     <!-- 调试数据展示 -->
+    {%if dev_data['flag']%}
+    <div class="container l-right-contents">  
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% for cate in category %} 
+                    
+
+                <br>
+                分类ID：<br>
+                {{cate.category_id}}<br>
+                <br>
+                分类名：<br>
+                {{cate.category_name}}<br>
+                <br>
+                所有课程：<br>
+                {{cate.category_course}}<br>
+
+                激活的课程：<br>
+                {{cate.category_active_course}}
+                <br>
+                -------------
+<!--                 {% for course in cate.is_active_course %}
+                    <span>{{course}}</span>
+                {%endfor%} -->
+            {% endfor %}
+        </div>
+    </div>
+    {%endif%} #}
+    
+    <!-- 浏览器判断 -->
+    <script src="/static/js/mobile.js" type="text/javascript"></script>
+    <script type="text/javascript">uaredirect("/m");</script>
+
+{% endblock %}

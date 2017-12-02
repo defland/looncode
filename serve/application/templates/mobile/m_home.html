@@ -1,0 +1,125 @@
+{% extends "/mobile/m_base.html" %}
+
+{% block title%} 懒人编程 - 全面的编程自学资源库 {%endblock%}
+
+
+{% block contents %}
+    
+    <div class="header_nav">
+        
+        <ul class="header_nav_ul">
+            
+            <li class="header_logo">
+                <a href="">
+                    <img class="header_nav_img"  src="../static/img/nav/mobile_logo.png" alt="">
+                </a>
+            </li>
+        </ul>
+        {# 课程内容导航 #}
+        <nav class="course_nav" >
+            <ul class="course_nav_ul am-dropdown" data-am-dropdown>
+                <li class="am-dropdown" data-am-dropdown> 
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;_b">
+                        分类 
+                        <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content" data-am-scrollspynav="{offsetTop: 60}" >
+                        {% for cour in category %}
+                        <li>
+                            <a href="#{{cour['category_id']}}">{{cour.category_name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    {# 课程详情区域 #}
+    <div class="container-fluid course_info" >
+        
+        {% for cour in category %}
+        <section class="course_section" id="{{cour['category_id']}}">
+            {# 分类 #}
+            <p class="course_category"><i class="am-icon-gg"></i> &nbsp{{cour.category_name}}</p>
+            {% for i in cour.category_course %}
+            {# 课程卡片 #}
+            <div class="card small">
+                <a href="/m/course/{{i.course_id}}">
+                      <div class="card-image">
+                        {# 免费+已兑换 #}
+                        {%if i.course_is_free %}
+                            <span class="am-badge am-badge-success am-radius course_status">限免课程</span>  
+                        {%elif i.is_active  %}
+                            <span class="am-badge am-badge-primary am-radius course_status">课程已兑换</span>  
+                        {%endif%}
+                        <img src="{{i.course_img}}">
+                      </div>
+                </a>
+              <div class="card-content">
+                <a href="/m/course/{{i.course_id}}" ><p>{{i.course_name}}</p></a>
+              </div>
+              <div class="card-action">
+                <span class="am-badge am-badge-secondary am-radius course_size">{{i.course_count}}套课程包</span>  
+                <span class="am-badge am-badge-warning am-radius course_size">共 {{i.course_size}}G</span>
+                <span class="course_read"> {{i.course_read_count}}k+ 浏览</span>
+              </div>
+            </div>
+            {% endfor %}
+
+        </section>
+        {% endfor %}
+    </div>
+
+
+
+
+    {# 尾部导航 #}
+    <div class="footnav">
+        
+        <ul class="footnav_ul">
+            <li class="footnav_li">
+                <a href="/m/course">
+                    <img class="footnav_img"  src="../static/img/nav/mobile_course_r.png" alt="">
+                    <span class="footnav_span select_span" >课程库</span>
+                </a></li>
+            <li class="footnav_li">   
+                <a href="/m/act">
+                    <img class="footnav_img" src="../static/img/nav/mobile_act_b.png" alt="">
+                    <span class="footnav_span" >兑换课程</span>
+                </a>
+            </li >
+            <li class="footnav_li">
+                <a href="/m/my">
+                    <img class="footnav_img" src="../static/img/nav/mobile_my_b.png" alt="">
+                    <span class="footnav_span " >我的</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    
+    {# 调试数据展示 #}
+    
+    <!-- 调试数据展示 -->
+    {%if dev_data['flag']%}
+    <div class="container l-right-contents">  
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>页面数据：<br> </strong>
+            <strong>课程数据：<br> </strong>
+            {{category}} <br><br>
+            {{has_active_course}} <br><br>
+            <strong>开发工具数据：<br> </strong>
+            {{dev_data}}<br>
+        </div>
+    </div>
+    {%endif%}
+
+
+{% endblock %}
+
+<!-- 这个页面集成美洽客服 -->
+{%block meiqia%}
+    {{ super() }}
+{%endblock%}

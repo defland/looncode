@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    <meta charset="UTF-8">
+    <title>{%block title%} {# 填充标题 #} {%endblock%}</title>
+    
+    <meta content="懒人编程,编程入门视频,编程视频百度云,编程课程百度云,python入门视频,python视频百度云,linux视频教程,java视频教程百度云,php编程视频百度云,懒人编程IT学院,编程资料百度云" name="keywords">
+    <meta content="懒人编程(looncode.com)提供丰富web前后端开发、php开发、java开发、ios/android开发、python开发等视频、源码、书籍教程资源整理。为软件编程自学的您提供最全面的资源整理。" name="description">
+    
+    <!-- 百度站点提交 -->
+    <meta name="baidu-site-verification" content="g5REiTkxWy" />
+    <meta name="baidu-site-verification" content="ucajoqXeUS" />
+    <meta name="baidu-site-verification" content="PbxApT8Vaf" />
+    <meta name="baidu-site-verification" content="3CvQfsfQxp" />
+    <meta name="baidu-site-verification" content="aLq7bHu86R" />
+    
+    <!-- bing -->
+    <meta name="msvalidate.01" content="D29410942285F4E8CFD44FCCF82FD8E5" />
+    <!-- 360站点提交验证 -->
+    <meta name="360-site-verification" content="2ab28f40eb30211886429fa1105d6e6e" />
+    <meta name="360-site-verification" content="3fadcfd55c6aab6c006ae9b6b9699e6c" />
+
+    <link rel="icon" href="../static/img/logo/v2_favicon.ico" mce_href="../static/img/logo/v2_favicon.ico" type="image/x-icon">  
+    <link rel="shortcut icon" href="../static/img/logo/v2_favicon.ico" mce_href="../static/img/logo/v2_favicon.ico" type="image/x-icon">  
+
+    <!-- sogou -->
+    <meta name="sogou_site_verification" content="QCNqq3UGsF"/>
+
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+     <!-- Compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
+          
+    <link rel="stylesheet" href="/static/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <!-- 第三方模态插件，文件的引入 -->
+    <link rel="stylesheet" href="/static/remodal/remodal.css">
+    <link rel="stylesheet" href="/static/remodal/remodal-default-theme.css">
+    
+    
+
+
+</head>
+<body>
+
+
+
+    {% block pc_nav %}
+    {# PC端导航 #}
+
+
+    <div class="l-left-nav z-depth-4">
+        <a href="/" class=" waves-effect waves-brown waves-ripple" ><img src="../static/img/logo/looncode_w.png" alt=""></img>
+        </a>
+        <ul>
+            <li><a class=" waves-effect waves-brown waves-ripple" href="/index"><img src="../static/img/nav/boxs.png" alt=""><p>课程库</p></a></li>
+
+
+            <!-- <li><a class=" waves-effect waves-brown waves-ripple" href="/act"><img src="../static/img/nav/conversion.png" alt=""><p>兑换课程</p></a></li> -->
+
+            <li><a class=" waves-effect waves-brown waves-ripple" href="/books"><img src="../static/img/nav/book.png" alt=""><p>书籍库</p></a></li>
+            <!-- <li><a class=" waves-effect waves-brown waves-ripple" href="/ways"><img src="../static/img/nav/trees.png" alt=""><p>技能树</p></a></li> -->
+            <li><a class=" waves-effect waves-brown waves-ripple" href="#"><img src="../static/img/nav/coding.png" alt=""><p>项目库(即将上线)</p></a></li>
+            <!-- <li><a class=" waves-effect waves-brown waves-ripple" href="/ways"><img src="../static/img/nav/project.png" alt=""><p>实战项目</p></a></li> -->
+            <!-- <li><a class=" waves-effect waves-brown waves-ripple" href="/ways"><img src="../static/img/nav/jobs.png" alt=""><p>求职数据</p></a></li> -->
+            
+<!--             <li><a class=" waves-effect waves-brown waves-ripple" href="/index"><img src="../static/img/nav/map.png" alt=""><p>学习线路图</p></a></li>
+
+            
+            <li><a class=" waves-effect waves-brown waves-ripple" href="/index"><img src="../static/img/nav/count.png" alt=""><p>LEAEyes统计</p></a></li> -->
+            <!-- <li><a class=" waves-effect waves-brown waves-ripple" href="/membership"><img src="../static/img/nav/data.png" alt=""><p>招聘数据</p></a></li> -->
+            <li><a class=" waves-effect waves-brown waves-ripple" href="/membership"><img src="../static/img/nav/vip.png" alt=""><p>会员计划</p></a></li>
+            <!-- <li><a target="_blank" class=" waves-effect waves-brown waves-ripple" href="https://shop131223524.taobao.com/category.htm?spm=a1z10.3-c-s.w4010-17279339713.2.76604142IbWblL&search=y"><img src="../static/img/nav/taobao.png" alt=""><p>前往店铺</p></a></li> -->
+        </ul>
+        <!-- 店铺入口 -->
+        <button type="button" class="btn btn-default  z-depth-0 store_links" onclick="window.open('https://shop131223524.taobao.com/category.htm')">  
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            店铺
+        </button>
+  
+
+    </div>
+    {% endblock %}
+
+    <!-- 引入组件 -->
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+
+
+    {% block contents %}
+    {# 内容区域 #}
+<!--     <div class="user_login container-fluid">
+        <div class="login_links">
+                <a href="">注册 | 登录</a>   
+        </div>
+    </div> -->
+    
+
+    {% endblock %}
+    
+
+    <!-- footer -->
+    <footer class="page-footer"> 
+          <div class="footer-copyright">
+            <div class="container-fluid">
+            
+            © 2017 懒人编程(looncode.com) v2.0.1 stable .&nbsp
+            <a class=" blue-text right" href="#copyright_modal"> 免责声明 </a>
+            </div>
+          </div>
+    </footer>
+
+
+          
+    {# 这里是版权声明弹窗 #}
+    <!-- modal内容，输入兑换码 -->
+    <div class="remodal" data-remodal-id="copyright_modal">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        <h5>免责声明</h5>
+        <span>本站资源结果均来自互联网信息收集整理，本站只提供信息整理和汇总分享服务。内容上如有侵犯的地方，请联系我们及时调整，感谢您的阅读</span>
+    </div>
+
+    <!-- 这里是mypanel弹窗 -->
+
+    <!-- 我的个人中心面板 -->
+    {{md.my_panel(current_user=current_user,category=category)}}
+        
+    {# JS相关文件引入 #}
+    <!-- import JS -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- materialize theme css and JS -->
+    <script src="/static/materialize/js/materialize.min.js"></script>
+
+    <!-- Compiled and minified JavaScript -->
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+    
+    <!-- 模态插件 -->
+    <script src="/static/remodal/remodal.min.js"></script>
+    
+    <!-- 显示密码插件 -->
+    <script src="/static/hideShowPassword/hideShowPassword.min.js"></script>
+    <script src="/static/hideShowPassword/vendor/zepto.custom.js"></script>
+    
+    <!-- mt图标 -->
+    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+
+    <!-- 统计代码 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?5f56114ed703885d7669ecf96645a1d9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- meiqia客服 -->
+    <script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function() {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        j = ei.createElement(q),
+            s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.charset = 'UTF-8';
+        j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+        s.parentNode.insertBefore(j, s);
+    })(window, document, 'script', '_MEIQIA');
+    _MEIQIA('entId', 82240);
+    </script>
+    
+    <!-- sild nav setting -->
+    <script>
+      // Initialize collapse button
+      $(".button-collapse").sideNav();
+      // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+      $('.collapsible').collapsible();
+    $('.button-collapse').sideNav({
+      menuWidth: 400, // Default is 300
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true, // Choose whether you can drag to open on touch screens,
+      
+    });
+    </script>
+
+    <!-- 提示的js设置 -->
+    <script>
+    $(document).ready(function(){
+        $('.tooltipped').tooltip({delay:250,position:'top'});
+    });
+    </script>
+    
+    <!-- 360自动收录 -->
+    <script>(function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?75dbbcbf7c7ded1c02f308f2ec9ae745":"https://jspassport.ssl.qhimg.com/11.0.1.js?75dbbcbf7c7ded1c02f308f2ec9ae745";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+    })();
+    </script>
+    <!-- 百度自动收录 -->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <!-- 谷歌结构化数据 -->
+    <script type="application/ld+json">
+        {
+          "@context": "http://www.looncode.com",
+          "@type": "编程自学资源站",
+          "url": "http://www.looncode.com",
+          "name": "懒人编程 - 全面的编程自学资源库",
+          "image": "http://looncode.com/static/img/other/google_seo_ico.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "url": "www.looncode.com",
+            "contactType": "url"
+          }
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+
+{% block contents %}
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+
+    {{ md.contents_title("测试","测试副标题")}}
+
+{% endblock %}
