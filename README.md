@@ -2,7 +2,7 @@
 
 编程自学资源汇总站点。
 
-(looncode.com)[http://looncode.com]
+[looncode.com](http://looncode.com)
 
 
 # 技术栈
