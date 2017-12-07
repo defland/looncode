@@ -5,7 +5,6 @@ import commands,re
 
 
 
-
 # 测试用的功能
 # 开发环境下显示git版本号 
 def show_git_data(flag=config["default"].GIT_VERSION_DISPLAY):
