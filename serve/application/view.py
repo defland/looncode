@@ -484,6 +484,11 @@ def ways():
     return "WAYS"
 
 
+@app.route('/projects')
+def projects():
+    return render_template('/pc/projects.html')
+
+
 @app.route('/membership',methods=['POST','GET'])
 def membership():
     # 价格方案页面
