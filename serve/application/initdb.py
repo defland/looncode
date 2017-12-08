@@ -391,7 +391,7 @@ def add_project(data=[]):
         'name':'html实战项目',
         'desc':'html+css+bootstarp3实战编写企业官网静态页面',
         'project_url':r'http://www.baidu.com',
-        'projects_type_id':1
+        'projects_type_id':3
     }
 
     return Projects.add_project(data)
@@ -418,6 +418,6 @@ if __name__ == "__main__":
     pass
     # print Vipcode.init_vipcode(50)
     # print add_project_type()
-    # print add_project()
-    print get_project()
+    print add_project()
+    # print get_project()
 
