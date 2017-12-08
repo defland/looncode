@@ -28,23 +28,18 @@
                     <div class="l-title-line"></div>
                     <div class="project-nav-data">
                         
-                        <ul>
-                            <a href="">
+                        <ul class="section">
+                            {# 项目分类导航 #}
+                            {%for pj in project_data %}
+                            <a href="#{{pj.project_cate_id}}"  >
                                 <li class="project-nav-li">
                                     <div>
-                                        <img src="/static/img/project-nav/python.png" alt="python">
-                                        <p>Python</p>
+                                        <img src="{{pj.project_cate_img}}" alt="python">
+                                        <p>{{pj.project_cate_name}}</p>
                                     </div>
                                 </li>
                             </a>
-                            <a href="">
-                                <li class="project-nav-li">
-                                    <div>
-                                        <img src="/static/img/project-nav/html.png" alt="python">
-                                        <p>HTML/CSS</p>
-                                    </div>
-                                </li>
-                            </a>
+                            {%endfor%}
                         </ul>
 
                     </div>
@@ -54,70 +49,43 @@
             <div class="left-project-left col-md-2"></div>
             <div class="right-project-data col-md-10">
                 {# 导航数据 #}
-                <section class="project-data-section">
-                    <h5 class="project-data-title">python</h5>
+
+                {%for pj in project_data %}
+                <section class="project-data-section section scrollspy" id="{{pj.project_cate_id}}">
+                    <h5 class="project-data-title">{{pj.project_cate_name}}</h5>
                     <div class="l-title-line"></div> 
-                    <div class="row ">
-                        <a href="" class="project-data-a">
-                            <div class="project-data-prject col-md-3 ">
-                                <span class="project-data-span">Python100个基础练习</span>
+                    <div class="row">
+                        {%for project in pj.project_cate_data%}
+                        <a href="{{project.project_url}}" class="project-data-a">
+                            <div class="project-data-prject col-md-4  waves-effect ">
+                                <span class="project-data-span">{{project.project_name}}</span>
                                 <div class="l-title-line"></div> 
                                 <p class="project-data-p">
-                                选择100个最基础的练习，帮助快速掌握Python语法和基础</p>  
-                                <div class="chip  project-chip">入门练习</div>
-
+                                {{project.project_desc}}</p>  
+                                {%for tag in project.project_tag %}
+                                    <div class="chip  project-chip">{{tag}}</div>
+                                {%endfor%}
                             </div>
                         </a>
-                        <a href="" class="project-data-a">
-                            <div class="project-data-prject col-md-3 ">
-                                <span class="project-data-span">Python100个基础练习</span>
-                                <div class="l-title-line"></div> 
-                                <p class="project-data-p">
-                                选择100个最基础的练习，帮助快速掌握Python语法和基础</p>  
-                                <div class="chip  project-chip">入门练习</div>
-
-                            </div>
-                        </a>
-                        <a href="" class="project-data-a">
-                            <div class="project-data-prject col-md-3 ">
-                                <span class="project-data-span">Python100个基础练习</span>
-                                <div class="l-title-line"></div> 
-                                <p class="project-data-p">
-                                选择100个最基础的练习，帮助快速掌握Python语法和基础</p>  
-                                <div class="chip  project-chip">入门练习</div>
-
-                            </div>
-                        </a>
-                        <a href="" class="project-data-a">
-                            <div class="project-data-prject col-md-3 ">
-                                <span class="project-data-span">Python100个基础练习</span>
-                                <div class="l-title-line"></div> 
-                                <p class="project-data-p">
-                                选择100个最基础的练习，帮助快速掌握Python语法和基础</p>  
-                                <div class="chip  project-chip">入门练习</div>
-
-                            </div>
-                        </a>  
-                        <a href="" class="project-data-a">
-                            <div class="project-data-prject col-md-3 ">
-                                <span class="project-data-span">Python100个基础练习</span>
-                                <div class="l-title-line"></div> 
-                                <p class="project-data-p">
-                                选择100个最基础的练习，帮助快速掌握Python语法和基础</p>  
-                                <div class="chip  project-chip">入门练习</div>
-
-                            </div>
-                        </a>
+                        {%endfor%}
                 
                     </div>
 
                 </section>   
-
+                {%endfor%}
             </div>
         </div>
 
 
     </div>
-
-
+    
+    {# 平滑滚动 #}
+    <script>
+    $(document).ready(function(){
+        $('.scrollspy').scrollSpy();
+    });
+        
+    </script>
+    
  {%endblock%}
+

@@ -1045,7 +1045,7 @@ input::-ms-input-placeholder {
     
     min-height: 120vh;
 /*    max-height: 100vh;*/
-    padding-top: 50px;
+    padding-top: 12px;
     background-color: #FCFBFC;
 
 }
@@ -1108,8 +1108,8 @@ input::-ms-input-placeholder {
 }
 .project-data-prject{
     
-    width: 23%;
-    height: 140px;
+    width: 31%;
+    height: 146px;
 /*    background-color: red;*/
     margin-top: 14px;
     margin-right: 1.4%;
@@ -1144,15 +1144,17 @@ input::-ms-input-placeholder {
 
 .project-data-p{
     
-    display: inline-block;
+    display: block;
     margin-top: 5px;
     font-size: 12px;
     color: #666;
     line-height: 24px;
 }
 .project-chip{
-    
-    display: inline-block;
+        
+    /*position: absolute;*/
+    bottom: 4px;
+    display: block;
     float: left!important;
     height: 20px!important;
     font-size: 9px!important;
