@@ -487,6 +487,8 @@ def ways():
 @app.route('/projects')
 def projects():
     # 项目导航
+
+    project_data =  Data_Processor.get_project_with_nav().get('data')
     fake_data = [
         {      
             'project_cate_id':100,
@@ -538,7 +540,7 @@ def projects():
 
     ]
 
-    return render_template('/pc/projects.html',project_data=fake_data)
+    return render_template('/pc/projects.html',project_data=project_data)
 
 
 @app.route('/membership',methods=['POST','GET'])
