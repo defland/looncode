@@ -487,60 +487,9 @@ def ways():
 @app.route('/projects')
 def projects():
     # 项目导航
-
+    # 获取数据
     project_data =  Data_Processor.get_project_with_nav().get('data')
-    fake_data = [
-        {      
-            'project_cate_id':100,
-            'project_cate_name':"Python",
-            'project_cate_img':'/static/img/project-nav/python.png',
-            'project_cate_data':[
-                {
-                    'project_id':1,
-                    'project_name':'0基础python100个练手跟学',
-                    'project_desc':'100个最基础的练习，帮助快速掌握Python语法和基础 入门练习',
-                    'project_tag':['入门','基础'],
-                    'project_url':'http://baidu.com'
-                },
-                {
-                    'project_id':2,
-                    'project_name':'Python单线程网页爬虫实战',
-                    'project_desc':'python+urllib2实现简单的网页爬虫',
-                    'project_tag':['基础','爬虫'],
-                    'project_url':'http://baidu.com'
-                },
-
-            ]
-
-        },
-        {      
-            'project_cate_id':101,
-            'project_cate_name':"HTML/CSS",
-            'project_cate_img':'/static/img/project-nav/html.png',
-            'project_cate_data':[
-                {
-                    'project_id':1,
-                    'project_name':'html实现模仿xxx网站练手',
-                    'project_desc':'100个最基础的练习，帮助快速掌握Python语法和基础 入门练习',
-                    'project_tag':['入门','基础'],
-                    'project_url':'http://baidu.com'
-                },
-                {
-                    'project_id':2,
-                    'project_name':'Python单线程网页爬虫实战',
-                    'project_desc':'python+urllib2实现简单的网页爬虫',
-                    'project_tag':['基础','爬虫'],
-                    'project_url':'http://baidu.com'
-                },
-
-            ]
-
-        }
-
-
-    ]
-
-    return render_template('/pc/projects.html',project_data=project_data)
+    return render_template('/pc/projects.html',project_data=project_data,current_user=current_user)
 
 
 @app.route('/membership',methods=['POST','GET'])

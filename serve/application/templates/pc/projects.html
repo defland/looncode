@@ -25,7 +25,7 @@
                         <p>实战项目导航</p>
                     </div>
 
-                    <div class="l-title-line"></div>
+                    <div class="l-title-line "></div>
                     <div class="project-nav-data">
                         
                         <ul class="section">
@@ -35,7 +35,8 @@
                                 <li class="project-nav-li">
                                     <div>
                                         <img src="{{pj.project_cate_img}}" alt="python">
-                                        <p>{{pj.project_cate_name}}</p>
+                                        <p>{{pj.project_cate_name}} </p>
+                                        <span class="label label-success label-project"></span>
                                     </div>
                                 </li>
                             </a>
@@ -52,14 +53,28 @@
 
                 {%for pj in project_data %}
                 <section class="project-data-section section scrollspy" id="{{pj.project_cate_id}}">
+                    
                     <h5 class="project-data-title">{{pj.project_cate_name}}</h5>
+                    {#  | <span>{{pj.project_cate_count}}个</span>   #}
                     <div class="l-title-line"></div> 
                     <div class="row">
                         {%for project in pj.project_cate_data%}
-                        <a href="{{project.project_url}}" class="project-data-a">
+                        {# 只有vip用户，或项目本身免费，才看得到链接#}
+                        {%if project.project_is_free == 1 %}
+                            <a href="{{project.project_url}}" class="project-data-a">
+                        {%elif  (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
+                            <a href="{{project.project_url}}" class="project-data-a">
+                        {%else%}  
+                            <a href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
+                        {%endif%}
                             <div class="project-data-prject col-md-4  waves-effect ">
+                                {%if project.project_is_free == 1 %}
+                                    <span class="label label-success is_active-label project-label gree lighten-1">Free</span>
+                                {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 1)  %}
+                                    <span class="label label-success is_active-label project-label grey lighten-1">已解锁</span>
+                                {%endif%}
                                 <span class="project-data-span">{{project.project_name}}</span>
-                                <div class="l-title-line"></div> 
+                                <div class="l-title-line line-opacity "></div> 
                                 <p class="project-data-p">
                                 {{project.project_desc}}</p>  
                                 {%for tag in project.project_tag %}

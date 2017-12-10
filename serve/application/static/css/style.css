@@ -1141,6 +1141,14 @@ input::-ms-input-placeholder {
     -o-transition: all .1s ease-out;
     transition: all .1s ease-out;
 }
+.project-data-title{
+    
+    font-size: 16px;
+    color: #666;
+    display: inline-block;
+    margin-bottom: 10px;
+
+}
 
 .project-data-p{
     
@@ -1163,4 +1171,12 @@ input::-ms-input-placeholder {
     /*border-radius: 19px;*/
     background-color: rgba(224, 224, 224, 0.30)!important;
 }
+.project-label{
 
+    top: 12px;
+    right: 8px;
+}
+
+.line-opacity{
+    opacity: 0.4!important;
+}

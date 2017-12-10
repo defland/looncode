@@ -1508,7 +1508,8 @@ class Project_Type(Base):
                     'project_desc':project.desc,
                     'project_tag':['入门','基础'],
                     'project_url':project.project_url,
-                    'project_cate_id':instance.id
+                    'project_cate_id':instance.id,
+                    'project_is_free':project.is_free
 
                 }
                 project_list.append(data)
@@ -1520,7 +1521,8 @@ class Project_Type(Base):
                 'project_cate_id':instance.id,
                 'project_cate_name':instance.name,
                 'project_cate_img':instance.img_url,
-                'project_cate_data':project_list
+                'project_cate_data':project_list,
+                'project_cate_count':len(project_list)
             }
             all_data.append(instance_data)
             
@@ -1558,6 +1560,9 @@ class Projects(Base):
     desc = Column('desc',String)
     tag = Column('tag',String)
     project_url = Column('tag',String)
+    # 项目免费
+    is_free = Column('is_free',Boolean,default=False)
+
 
     # 所属分类编号
     projects_type_id = Column('projects_type_id',Integer,ForeignKey('Project_Type.id'))
