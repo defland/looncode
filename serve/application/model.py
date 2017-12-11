@@ -431,8 +431,9 @@ class Category(Base):
                         'book_mark':book.book_mark,
                         'book_img_url':book.book_img_url,
                         'book_download_url':book.book_download_url,
+                        'book_download_password':book.book_download_password,
                         'book_buy_url':book.book_buy_url,
-                        'bookslist_id':book.bookslist_id
+                        'bookslist_id':book.bookslist_id,
                     
                     }
                     # 放入列表
@@ -442,9 +443,9 @@ class Category(Base):
                     'bookslist_id':bookslist_data.bookslist_id,
                     'bookslist_name':bookslist_data.bookslist_name,
                     'bookslist_count':len(book_data),
-                    'bookslist_book':book_data,
                     'bookslist_url':bookslist_data.bookslist_url,
-                    'bookslist_password':bookslist_data.bookslist_password
+                    'bookslist_password':bookslist_data.bookslist_password,
+                    'bookslist_book':book_data
                 }
                 bookslist_list.append(x)
 
@@ -827,7 +828,7 @@ class Bookslist(Base):
     bookslist_name = Column('bookslist_name',String)
     bookslist_count = Column('bookslist_count',Integer,default=0)
 
-    bookslist_url = Column('bookslist_name',String)
+    bookslist_url = Column('bookslist_url',String)
     bookslist_password = Column('bookslist_password',String) 
 
     # 一个bookslist包含多个book的关系
