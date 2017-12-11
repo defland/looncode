@@ -460,16 +460,16 @@ def books():
     
     # 开启缓存
 
-    # if R.get('obj_bookslist') != None:
-    #     print "bookslist页面来自Redis缓存"
-    #     cate_data = eval(R.get('obj_bookslist'))
-    # else:
-    #     cate_data = Data_Processor.get_category_has_bookdata()
-    #     print 'bookslist缓存写入'
-    #     R.set('obj_bookslist',cate_data,ex=CACHE_TIME,nx=True)
+    if R.get('obj_bookslist') != None:
+        print "bookslist页面来自Redis缓存"
+        cate_data = eval(R.get('obj_bookslist'))
+    else:
+        cate_data = Data_Processor.get_category_has_bookdata()
+        print 'bookslist缓存写入'
+        R.set('obj_bookslist',cate_data,ex=CACHE_TIME,nx=True)
 
-    # 不适用redis缓存
-    cate_data = Data_Processor.get_category_has_bookdata()
+    # # 不适用redis缓存
+    # cate_data = Data_Processor.get_category_has_bookdata()
     print cate_data
     # 获取分类和课程信息
     dev_data = Data_Processor.get_devtools_data()
