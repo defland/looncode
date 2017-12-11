@@ -63,11 +63,13 @@
                                 本书单汇总网盘： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
                                 提取码:<code>{{bookslist.bookslist_password}} </code>
                             </code>
-                        {%else%}
-                            <code class="books_more"  >
+                        {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 0)%}
+                            <code class="books_more book-code"  >
                                 本书单打包下载地址： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
                                 提取码:<code>VIP会员可见</code>
                             </code>
+                        {%else%}
+                            {# 游客就看不见 #}
                         {%endif%}  
 
                     </div>
@@ -99,7 +101,7 @@
                                     </span>
                                 {%else%}
                                     <span class="books_down">
-                                        <a href="#" onclick="Materialize.toast('VIP用户提供下载支持', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
+                                        <a href="#" onclick="Materialize.toast('仅VIP用户可下载', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
                                     
                                     </span>       
                                 {%endif%}

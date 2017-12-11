@@ -75,7 +75,7 @@ td {
     font-size: 12px;
 }
 .alert {
-    padding: 8px;
+    /*padding: 8px;*/
 }
 
 .waves-effect.waves-brown .waves-ripple {
@@ -1180,12 +1180,14 @@ input::-ms-input-placeholder {
 .line-opacity{
     opacity: 0.4!important;
 }
+
 .book-download-data{
     
    display:inline-block;
-
+   /*visibility: hidden;*/
 
 }
+
 .book-code{
     
     margin:0px;
