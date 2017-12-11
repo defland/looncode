@@ -55,12 +55,18 @@
                         <span class="card-title">{{bookslist.bookslist_name}}</span>
                     </h4>
                     <span class="books_more" href="#">{{bookslist.bookslist_count}}本</span>
+                    
                     {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
-                    <code class="books_more"  >
-                        本书单网盘地址： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
-                        提取码:<code>{{bookslist.bookslist_password}} </code>
-                    </code>
-
+                    {# VIP会员显示密码，非VIP显示地址 #}
+                        <code class="books_more"  >
+                            本书单汇总网盘： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
+                            提取码:<code>{{bookslist.bookslist_password}} </code>
+                        </code>
+                    {%else%}
+                        <code class="books_more"  >
+                            本书单打包下载地址： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
+                            提取码:<code>VIP会员可见</code>
+                        </code>
                     {%endif%}
                     <ul>
                         {# 书本，需要循环 #}
@@ -89,7 +95,7 @@
                                     </span>
                                 {%else%}
                                     <span class="books_down">
-                                        <a href="#" onclick="Materialize.toast('VIP会员支持PDF下载:）', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
+                                        <a href="#" onclick="Materialize.toast('VIP用户提供下载支持', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
                                     
                                     </span>       
                                 {%endif%}

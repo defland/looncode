@@ -413,11 +413,11 @@ if __name__ == "__main__":
     
     # print add_bookslist() 9787302255659, 
     # print add_book()
-    # print add_book_with_isbn([9787121284410],booklist=821)
+    print add_book_with_isbn([9787121137679,9787121060748,9787115332912,9787121126475, 9787121148750,9787111226789,9787302228318, 9787111398790],booklist=819)
     # print test_get_cate_with_bookslist()
     pass
     # print Vipcode.init_vipcode(50)
     # print add_project_type()
-    print add_project()
+    # print add_project()
     # print get_project()
 
