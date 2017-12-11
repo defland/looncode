@@ -432,7 +432,8 @@ class Category(Base):
                         'book_img_url':book.book_img_url,
                         'book_download_url':book.book_download_url,
                         'book_buy_url':book.book_buy_url,
-                        'bookslist_id':book.bookslist_id,
+                        'bookslist_id':book.bookslist_id
+                    
                     }
                     # 放入列表
                     book_data.append(y)
@@ -441,7 +442,9 @@ class Category(Base):
                     'bookslist_id':bookslist_data.bookslist_id,
                     'bookslist_name':bookslist_data.bookslist_name,
                     'bookslist_count':len(book_data),
-                    'bookslist_book':book_data
+                    'bookslist_book':book_data,
+                    'bookslist_url':bookslist_data.bookslist_url,
+                    'bookslist_password':bookslist_data.bookslist_password
                 }
                 bookslist_list.append(x)
 
@@ -824,6 +827,9 @@ class Bookslist(Base):
     bookslist_name = Column('bookslist_name',String)
     bookslist_count = Column('bookslist_count',Integer,default=0)
 
+    bookslist_url = Column('bookslist_name',String)
+    bookslist_password = Column('bookslist_password',String) 
+
     # 一个bookslist包含多个book的关系
     bookslist_book = relationship("Book")
     
@@ -857,6 +863,8 @@ class Bookslist(Base):
                 bookslist_name = bookslist.get('name'),
                 bookslist_count = bookslist.get('count'),
                 category_id = bookslist.get('category_id'),
+                bookslist_url = bookslist.get('url'),
+                bookslist_password = bookslist.get('password')
                 )
             add_cate_list.append(new_bookslist)
 
@@ -884,7 +892,9 @@ class Book(Base):
 
     # 下载链接
     book_download_url = Column('book_download_url',String)
+    book_download_password = Column('book_download_password',String)
     book_buy_url = Column('book_buy_url',String)
+
 
 
     # 和course的关系
@@ -918,15 +928,16 @@ class Book(Base):
         for book in add_list:
             new_books = Book( 
                 book_id = book.get('book_id'),
-                book_name = book.get('book_name'),
-                book_desc = book.get('book_desc'),
-                book_isbn = book.get('book_isbn'),
-                book_author = book.get('book_author'),
-                book_mark = book.get('book_mark'),
-                book_img_url = book.get('book_img_url'),
-                book_download_url = book.get('book_download_url'),
+                book_name = unicode(book.get('book_name')),
+                book_desc = unicode(book.get('book_desc')),
+                book_isbn = unicode(book.get('book_isbn')),
+                book_author = unicode(book.get('book_author')),
+                book_mark = unicode(book.get('book_mark')),
+                book_img_url = unicode(book.get('book_img_url')),
+                book_download_url = unicode(book.get('book_download_url')),
+                book_download_password = unicode(book.get('book_download_password')),
                 book_buy_url = unicode(book_buy + book.get('book_name')),
-                bookslist_id= book.get('bookslist_id'),
+                bookslist_id = book.get('bookslist_id'),
                 )
             add_book_list.append(new_books)
 

@@ -49,7 +49,7 @@
                 {# 书单信息，这里就需要循环了 #}
                 {% for bookslist in cate.category_bookslist %}
                 <div class="container-fluid">
-
+                    {{ bookslist}}
                     <i class="material-icons"><span class="glyphicon glyphicon-book " aria-hidden="true"></span></i>
                     <h4 class="books_cate">
                         <span class="card-title">{{bookslist.bookslist_name}}</span>
@@ -73,8 +73,12 @@
                                 
                                 {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
                                     <span class="books_down">
-                                        <a href="{{book.book_download_url}}"><div class="chip books-chip">PDF下载 </div></a>
-                                    
+                                        {%if book.book_download_url != None %}
+                                            <a href="{{book.book_download_url}}"><div class="chip books-chip">PDF下载{{book.book_download_password}} </div></a>
+                                        {% elif bookslist.bookslist_url %}
+                                            <a href="{{book.book_download_url}}"><div class="chip books-chip">PDF下载{{bookslist.bookslist_password}} </div></a>
+
+                                        {%endif%}
                                     </span>
                                 {%else%}
                                     <span class="books_down">
