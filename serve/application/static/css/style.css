@@ -1180,3 +1180,16 @@ input::-ms-input-placeholder {
 .line-opacity{
     opacity: 0.4!important;
 }
+.book-download-data{
+    
+   display:inline-block;
+
+
+}
+.book-code{
+    
+    margin:0px;
+    background-color: rgba(248, 240, 242, 0.40);
+    padding: 2px 2px;
+    color: #999;
+}

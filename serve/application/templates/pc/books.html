@@ -56,23 +56,27 @@
                     </h4>
                     <span class="books_more" href="#">{{bookslist.bookslist_count}}本</span>
                     
-                    {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
-                    {# VIP会员显示密码，非VIP显示地址 #}
-                        <code class="books_more"  >
-                            本书单汇总网盘： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
-                            提取码:<code>{{bookslist.bookslist_password}} </code>
-                        </code>
-                    {%else%}
-                        <code class="books_more"  >
-                            本书单打包下载地址： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
-                            提取码:<code>VIP会员可见</code>
-                        </code>
-                    {%endif%}
+                    <div class="book-download-data">
+                        {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
+                        {# VIP会员显示密码，非VIP显示地址 #}
+                            <code class="books_more book-code"  >
+                                本书单汇总网盘： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
+                                提取码:<code>{{bookslist.bookslist_password}} </code>
+                            </code>
+                        {%else%}
+                            <code class="books_more"  >
+                                本书单打包下载地址： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
+                                提取码:<code>VIP会员可见</code>
+                            </code>
+                        {%endif%}  
+
+                    </div>
+
                     <ul>
                         {# 书本，需要循环 #}
                         {%for book in bookslist.bookslist_book%}
-                        <li class="books_list">
-                            <a href="javascript:void(0);">
+                        <li class="books_list" >
+                            <a href="#!" class="books-download-info" >
                                 <img src="{{book.book_img_url}}" alt="" class="books_img">
                                 <h5 class="books_name">{{book.book_name}}</h5>
                                 <span class="books_description">{{book.book_desc}}</span>
@@ -117,6 +121,7 @@
 
     </div>
     
+
     <!-- 非VIP用户提醒弹窗 -->
     <!-- modal内容，输入兑换码 -->
     <!-- <div class="remodal books_modal z-depth-2 " data-remodal-id="books_modal">
@@ -130,6 +135,9 @@
             <button type="submit" data-remodal-action="confirm" class="remodal-confirm">确认</button>
         </div>
     </div> -->
+    
+
+
 
 
     {# 开发信息 #}
@@ -147,4 +155,24 @@
     {%endif%}
 
 
+{%endblock%}
+
+
+{% block js %}
+
+    {# JQ脚本 #}
+    <script>
+    $(function(){  
+        $('.books-download-info').click(function(){//点击a标签  
+            if($('.test').is(':hidden')){//如果当前隐藏  
+            $('.test').show();//那么就显示div  
+            }else{//否则  
+            $('.test').hide();//就隐藏div  
+            }  
+        })  
+    }) 
+
+    </script>
+
+ 
 {%endblock%}
