@@ -486,12 +486,13 @@ def ways():
     return "WAYS"
 
 
+@app.route('/nav')
 @app.route('/projects')
 def projects():
     # 项目导航
     # 获取数据
     project_data =  Data_Processor.get_project_with_nav().get('data')
-    return render_template('/pc/projects.html',project_data=project_data,current_user=current_user)
+    return render_template('/pc/nav.html',project_data=project_data,current_user=current_user)
 
 
 @app.route('/membership',methods=['POST','GET'])
