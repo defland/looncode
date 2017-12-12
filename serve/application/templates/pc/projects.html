@@ -61,15 +61,15 @@
                         {%for project in pj.project_cate_data%}
                         {# 只有vip用户，或项目本身免费，才看得到链接#}
                         {%if project.project_is_free == 1 %}
-                            <a href="{{project.project_url}}" class="project-data-a">
+                            <a target="_blank" href="{{project.project_url}}" class="project-data-a">
                         {%elif  (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
-                            <a href="{{project.project_url}}" class="project-data-a">
+                            <a target="_blank" href="{{project.project_url}}" class="project-data-a">
                         {%else%}  
-                            <a href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
+                            <a target="_blank"href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
                         {%endif%}
                             <div class="project-data-prject col-md-4  waves-effect ">
-                                {%if project.project_is_free == 1 %}
-                                    <span class="label label-success is_active-label project-label gree lighten-1">Free</span>
+                                {%if project.project_is_free == 0 %}
+                                    <span class="label label-success is_active-label project-label gree lighten-1">会员</span>
                                 {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 1)  %}
                                     <span class="label label-success is_active-label project-label grey lighten-1">已解锁</span>
                                 {%endif%}

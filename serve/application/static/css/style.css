@@ -1092,7 +1092,7 @@ input::-ms-input-placeholder {
 .project-nav-li p{
     
     display: inline-block;
-    margin-left: 7px;
+    margin-left: 9px;
 
 }
 .project-data-section{
@@ -1162,7 +1162,7 @@ input::-ms-input-placeholder {
 }
 .project-chip{
         
-    /*position: absolute;*/
+    position: absolute;
     bottom: 4px;
     display: block;
     float: left!important;
