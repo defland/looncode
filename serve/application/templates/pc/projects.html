@@ -65,7 +65,7 @@
                         {%elif  (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
                             <a target="_blank" href="{{project.project_url}}" class="project-data-a">
                         {%else%}  
-                            <a target="_blank"href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
+                            <a href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
                         {%endif%}
                             <div class="project-data-prject col-md-4  waves-effect ">
                                 {%if project.project_is_free == 0 %}
