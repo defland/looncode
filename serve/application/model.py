@@ -1518,7 +1518,7 @@ class Project_Type(Base):
                     'project_id':project.id,
                     'project_name':project.name,
                     'project_desc':project.desc,
-                    'project_tag':['入门','基础'],
+                    'project_tag':project.tag,
                     'project_url':project.project_url,
                     'project_cate_id':instance.id,
                     'project_is_free':project.is_free
@@ -1571,7 +1571,7 @@ class Projects(Base):
     name = Column('name',String)
     desc = Column('desc',String)
     tag = Column('tag',String)
-    project_url = Column('tag',String)
+    project_url = Column('project_url',String)
     # 项目免费
     is_free = Column('is_free',Boolean,default=False)
 
@@ -1607,8 +1607,8 @@ class Projects(Base):
             desc=unicode(data.get('desc')),
             tag=unicode(data.get('tag')),
             project_url=unicode(data.get('project_url')),
-            projects_type_id = data.get('projects_type_id')
-
+            projects_type_id = data.get('projects_type_id'),
+            is_free =  data.get('is_free')
             )
         sess.add(add_data)
         sess.commit()

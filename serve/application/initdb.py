@@ -376,8 +376,8 @@ def add_project_type(data=[]):
     data = {
 
         'id':None,
-        'name':'',
-        'img_url':r'/static/img/project-nav/java.png'
+        'name':'算法',
+        'img_url':r'/static/img/project-nav/suanfa.png'
     }
 
     return Project_Type.add_type(data)
@@ -388,10 +388,12 @@ def add_project(data=[]):
     data = {
 
         'id':None,
-        'name':'html实战项目',
-        'desc':'html+css+bootstarp3实战编写企业官网静态页面',
-        'project_url':r'http://www.baidu.com',
-        'projects_type_id':3
+        'name':'Rx.js中文文档',
+        'desc':'未来可能火起来的JS框架',
+        'tag':'在线文档',
+        'project_url':r'http://cn.rx.js.org?url=looncode.com',
+        'projects_type_id':3,
+        'is_free':True
     }
 
     return Projects.add_project(data)
@@ -413,11 +415,11 @@ if __name__ == "__main__":
     
     # print add_bookslist() 9787302255659, 
     # print add_book()
-    print add_book_with_isbn([9787121137679,9787121060748,9787115332912,9787121126475, 9787121148750,9787111226789,9787302228318, 9787111398790],booklist=819)
+    # print add_book_with_isbn([9787121137679,9787121060748,9787115332912,9787121126475, 9787121148750,9787111226789,9787302228318, 9787111398790],booklist=819)
     # print test_get_cate_with_bookslist()
     pass
     # print Vipcode.init_vipcode(50)
     # print add_project_type()
-    # print add_project()
+    print add_project()
     # print get_project()
 

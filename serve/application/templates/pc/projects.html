@@ -1,7 +1,7 @@
 
 {% extends "base.html" %}
 
-{%block title%} 项目导航 {%endblock%}
+{%block title%} 懒人导航 {%endblock%}
 
 
 {% block contents %}
@@ -22,7 +22,7 @@
                    
                     <div class="project-nav-title">
                         {# <h5>项目导航</h5> #}
-                        <p>实战项目导航</p>
+                        <p>懒人学习导航</p>
                     </div>
 
                     <div class="l-title-line "></div>
@@ -73,13 +73,13 @@
                                 {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 1)  %}
                                     <span class="label label-success is_active-label project-label grey lighten-1">已解锁</span>
                                 {%endif%}
-                                <span class="project-data-span">{{project.project_name}}</span>
+                                <span class="project-data-span">{{project.project_name | capitalize() }}</span>
                                 <div class="l-title-line line-opacity "></div> 
                                 <p class="project-data-p">
                                 {{project.project_desc}}</p>  
-                                {%for tag in project.project_tag %}
-                                    <div class="chip  project-chip">{{tag}}</div>
-                                {%endfor%}
+                                {# {%for tag in project.project_tag %} #}
+                                    <div class="chip  project-chip">{{project.project_tag}}</div>
+                                {# {%endfor%} #}
                             </div>
                         </a>
                         {%endfor%}
