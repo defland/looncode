@@ -460,15 +460,17 @@ def books():
     
     # 开启缓存
 
-    if R.get('obj_bookslist') != None:
-        print "bookslist页面来自Redis缓存"
-        cate_data = eval(R.get('obj_bookslist'))
-    else:
-        cate_data = Data_Processor.get_category_has_bookdata()
-        print 'bookslist缓存写入'
-        R.set('obj_bookslist',cate_data,ex=CACHE_TIME,nx=True)
+    # if R.get('obj_bookslist') != None:
+    #     print "bookslist页面来自Redis缓存"
+    #     cate_data = eval(R.get('obj_bookslist'))
+    # else:
+    #     cate_data = Data_Processor.get_category_has_bookdata()
+    #     print 'bookslist缓存写入'
+    #     R.set('obj_bookslist',cate_data,ex=CACHE_TIME,nx=True)
 
-
+    # # 不适用redis缓存
+    cate_data = Data_Processor.get_category_has_bookdata()
+    print cate_data
     # 获取分类和课程信息
     dev_data = Data_Processor.get_devtools_data()
     return render_template( \
@@ -482,6 +484,15 @@ def books():
 @login_required
 def ways():
     return "WAYS"
+
+
+@app.route('/nav')
+@app.route('/projects')
+def projects():
+    # 项目导航
+    # 获取数据
+    project_data =  Data_Processor.get_project_with_nav().get('data')
+    return render_template('/pc/nav.html',project_data=project_data,current_user=current_user)
 
 
 @app.route('/membership',methods=['POST','GET'])

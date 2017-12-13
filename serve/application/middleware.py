@@ -204,6 +204,11 @@ class Data_Processor(object):
         else:
             return code_result
 
-       
+     
+    @staticmethod
+    def get_project_with_nav():
+        # 获取数据
+        
+        return Project_Type.get_all_data()
 
 

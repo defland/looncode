@@ -371,8 +371,41 @@ def test_get_cate_with_bookslist():
     return x
 
 
+def add_project_type(data=[]):
+    # 添加分类
+    data = {
+
+        'id':None,
+        'name':'算法',
+        'img_url':r'/static/img/project-nav/suanfa.png'
+    }
+
+    return Project_Type.add_type(data)
+
+
+def add_project(data=[]):
+    # 添加分类
+    data = {
+
+        'id':None,
+        'name':'QMUI',
+        'desc':'腾讯QMUITeam出品的UI框架，涵盖的WEB/IOS/Android3个领域。',
+        'tag':'UI框架',
+        'project_url':r'http://qmuiteam.com?url=looncode.com',
+        'projects_type_id':14,
+        'is_free':True
+    }
+
+    return Projects.add_project(data)
+
+def get_project():
+    return Project_Type.get_all_data()
+
 if __name__ == "__main__":
 
+    import sys  
+    reload(sys)  
+    sys.setdefaultencoding('utf8')  
     # print init_category()
     # print init_course()
     # print init_resouce()
@@ -382,7 +415,11 @@ if __name__ == "__main__":
     
     # print add_bookslist() 9787302255659, 
     # print add_book()
-    print add_book_with_isbn([9787121284410],booklist=821)
+    # print add_book_with_isbn([9787121137679,9787121060748,9787115332912,9787121126475, 9787121148750,9787111226789,9787302228318, 9787111398790],booklist=819)
     # print test_get_cate_with_bookslist()
     pass
     # print Vipcode.init_vipcode(50)
+    # print add_project_type()
+    print add_project()
+    # print get_project()
+

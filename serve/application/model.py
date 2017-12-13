@@ -431,8 +431,10 @@ class Category(Base):
                         'book_mark':book.book_mark,
                         'book_img_url':book.book_img_url,
                         'book_download_url':book.book_download_url,
+                        'book_download_password':book.book_download_password,
                         'book_buy_url':book.book_buy_url,
                         'bookslist_id':book.bookslist_id,
+                    
                     }
                     # 放入列表
                     book_data.append(y)
@@ -441,6 +443,8 @@ class Category(Base):
                     'bookslist_id':bookslist_data.bookslist_id,
                     'bookslist_name':bookslist_data.bookslist_name,
                     'bookslist_count':len(book_data),
+                    'bookslist_url':bookslist_data.bookslist_url,
+                    'bookslist_password':bookslist_data.bookslist_password,
                     'bookslist_book':book_data
                 }
                 bookslist_list.append(x)
@@ -824,6 +828,9 @@ class Bookslist(Base):
     bookslist_name = Column('bookslist_name',String)
     bookslist_count = Column('bookslist_count',Integer,default=0)
 
+    bookslist_url = Column('bookslist_url',String)
+    bookslist_password = Column('bookslist_password',String) 
+
     # 一个bookslist包含多个book的关系
     bookslist_book = relationship("Book")
     
@@ -857,6 +864,8 @@ class Bookslist(Base):
                 bookslist_name = bookslist.get('name'),
                 bookslist_count = bookslist.get('count'),
                 category_id = bookslist.get('category_id'),
+                bookslist_url = bookslist.get('url'),
+                bookslist_password = bookslist.get('password')
                 )
             add_cate_list.append(new_bookslist)
 
@@ -884,7 +893,9 @@ class Book(Base):
 
     # 下载链接
     book_download_url = Column('book_download_url',String)
+    book_download_password = Column('book_download_password',String)
     book_buy_url = Column('book_buy_url',String)
+
 
 
     # 和course的关系
@@ -918,15 +929,16 @@ class Book(Base):
         for book in add_list:
             new_books = Book( 
                 book_id = book.get('book_id'),
-                book_name = book.get('book_name'),
-                book_desc = book.get('book_desc'),
-                book_isbn = book.get('book_isbn'),
-                book_author = book.get('book_author'),
-                book_mark = book.get('book_mark'),
-                book_img_url = book.get('book_img_url'),
-                book_download_url = book.get('book_download_url'),
+                book_name = unicode(book.get('book_name')),
+                book_desc = unicode(book.get('book_desc')),
+                book_isbn = unicode(book.get('book_isbn')),
+                book_author = unicode(book.get('book_author')),
+                book_mark = unicode(book.get('book_mark')),
+                book_img_url = unicode(book.get('book_img_url')),
+                book_download_url = unicode(book.get('book_download_url')),
+                book_download_password = unicode(book.get('book_download_password')),
                 book_buy_url = unicode(book_buy + book.get('book_name')),
-                bookslist_id= book.get('bookslist_id'),
+                bookslist_id = book.get('bookslist_id'),
                 )
             add_book_list.append(new_books)
 
@@ -1462,6 +1474,149 @@ class Vipcode(Base):
     def del_code(code=None):
         pass
 
+
+
+
+# 项目导航的分类表
+class Project_Type(Base):
+    """项目导航的分类表"""
+    __tablename__ = 'Project_Type'
+
+    id = Column('id',Integer, primary_key=True,autoincrement=True)
+    name = Column('name',String)
+    img_url = Column('img_url',String)
+  
+    # 1对多
+    projects_data = relationship("Projects")
+
+    # 获取session
+    @staticmethod
+    def get_session(engine):
+        # 获取session对象
+        DBSession = sessionmaker(bind=engine)
+        sess = DBSession()
+        print "Get sesssion OK"
+        return sess
+
+    # 查、增、验证、修改密码、
+    @staticmethod
+    def get_all_data():
+        # 获取 
+        sess = Project_Type.get_session(engine)
+        data = []
+        # 查询所有的分类和项目条目出来
+        all_data = []
+
+        for instance in sess.query(Project_Type).order_by(Project_Type.id):
+            # 构造数据
+            # 一个分类地下的所有项目
+            project_list = []
+            for project in instance.projects_data:
+
+                data = {
+
+                    'project_id':project.id,
+                    'project_name':project.name,
+                    'project_desc':project.desc,
+                    'project_tag':project.tag,
+                    'project_url':project.project_url,
+                    'project_cate_id':instance.id,
+                    'project_is_free':project.is_free
+
+                }
+                project_list.append(data)
+
+
+            # 每个分类的所有数据
+            instance_data = {
+
+                'project_cate_id':instance.id,
+                'project_cate_name':instance.name,
+                'project_cate_img':instance.img_url,
+                'project_cate_data':project_list,
+                'project_cate_count':len(project_list)
+            }
+            all_data.append(instance_data)
+            
+
+        sess.close()
+        return {'flag':True,'status':'add succeed','data':all_data}
+
+    # 增加
+    @staticmethod
+    def add_type(data={}):
+        if data == {}:
+            return {'flag':False,'status':'no data pass in '}
+        sess = Project_Type.get_session(engine)
+        add_data = Project_Type(
+            id=data.get('id'),
+            name=unicode(data.get('name')),
+            img_url=unicode(data.get('img_url'))
+            )
+        sess.add(add_data)
+        sess.commit()
+        sess.close()
+        return {'flag':True,'status':'add succeed'}
+
+
+
+
+
+# 项目条目表
+class Projects(Base):
+    """项目条目表"""
+    __tablename__ = 'Projects'
+
+    id = Column('id',Integer, primary_key=True,autoincrement=True)
+    name = Column('name',String)
+    desc = Column('desc',String)
+    tag = Column('tag',String)
+    project_url = Column('project_url',String)
+    # 项目免费
+    is_free = Column('is_free',Boolean,default=False)
+
+
+    # 所属分类编号
+    projects_type_id = Column('projects_type_id',Integer,ForeignKey('Project_Type.id'))
+
+    # 获取session
+    @staticmethod
+    def get_session(engine):
+        # 获取session对象
+        DBSession = sessionmaker(bind=engine)
+        sess = DBSession()
+        print "Get sesssion OK"
+        return sess
+    
+     # 查、增、验证、修改密码、
+    @staticmethod
+    def get_project(data=None):
+        pass
+
+    # 增加
+    @staticmethod
+    def add_project(data=None):
+
+        if data == {}:
+            return {'flag':False,'status':'no data pass in '}
+        sess = Projects.get_session(engine)
+        add_data = Projects(
+
+            id=data.get('id'),
+            name=unicode(data.get('name')),
+            desc=unicode(data.get('desc')),
+            tag=unicode(data.get('tag')),
+            project_url=unicode(data.get('project_url')),
+            projects_type_id = data.get('projects_type_id'),
+            is_free =  data.get('is_free')
+            )
+        sess.add(add_data)
+        sess.commit()
+        sess.close()
+        return {'flag':True,'status':'add succeed'}
+        pass
+
+    
 
 
 # 用于注册登录的用户类

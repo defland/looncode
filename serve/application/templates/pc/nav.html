@@ -1,0 +1,107 @@
+
+{% extends "base.html" %}
+
+{%block title%} 懒人导航 {%endblock%}
+
+
+{% block contents %}
+
+
+    {# 引入宏组件 #}
+    {% import 'component.html' as md %}
+    
+    {# 项目内容区 #}
+    <div class="container-flud project-container">
+        
+
+        {# 内容 #}
+        <div class="row project-row">
+            {# 导航 #}
+            <div class="row project-row">
+                <div class="left-project-nav col-md-2 col-sm-1 col-xs-1 col-lg-2
+   ">
+                   
+                    <div class="project-nav-title">
+                        {# <h5>项目导航</h5> #}
+                        <p>懒人学习导航</p>
+                    </div>
+
+                    <div class="l-title-line "></div>
+                    <div class="project-nav-data">
+                        
+                        <ul class="section">
+                            {# 项目分类导航 #}
+                            {%for pj in project_data %}
+                            <a href="#{{pj.project_cate_id}}"  >
+                                <li class="project-nav-li">
+                                    <div>
+                                        <img src="{{pj.project_cate_img}}" alt="python">
+                                        <p>{{pj.project_cate_name}} </p>
+                                        <span class="label label-success label-project"></span>
+                                    </div>
+                                </li>
+                            </a>
+                            {%endfor%}
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="left-project-left col-md-2 col-sm-0  col-xs-1 col-lg-2"></div>
+            <div class="right-project-data col-md-10 col-sm-12  col-xs-12  col-lg-10  ">
+                {# 导航数据 #}
+
+                {%for pj in project_data %}
+                <section class="project-data-section section scrollspy" id="{{pj.project_cate_id}}">
+                    
+                    <h5 class="project-data-title">{{pj.project_cate_name}}</h5>
+                    {#  | <span>{{pj.project_cate_count}}个</span>   #}
+                    <div class="l-title-line"></div> 
+                    <div class="row">
+                        {%for project in pj.project_cate_data%}
+                        {# 只有vip用户，或项目本身免费，才看得到链接#}
+                        {%if project.project_is_free == 1 %}
+                            <a target="_blank" href="{{project.project_url}}" class="project-data-a">
+                        {%elif  (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
+                            <a target="_blank" href="{{project.project_url}}" class="project-data-a">
+                        {%else%}  
+                            <a href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
+                        {%endif%}
+                            <div class="project-data-prject col-sm-3 col-md-4  col-lg-3 waves-effect ">
+                                {%if project.project_is_free == 0 %}
+                                    <span class="label label-success is_active-label project-label gree lighten-1">会员</span>
+                                {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 1)  %}
+                                    <span class="label label-success is_active-label project-label grey lighten-1"></span>
+                                {%endif%}
+                                <span class="project-data-span">{{project.project_name | capitalize() }}</span>
+                                <div class="l-title-line line-opacity "></div> 
+                                <p class="project-data-p">
+                                {{project.project_desc}}</p>  
+                                {# {%for tag in project.project_tag %} #}
+                                    <div class="chip  project-chip">{{project.project_tag}}</div>
+                                {# {%endfor%} #}
+                            </div>
+                        </a>
+                        {%endfor%}
+                
+                    </div>
+
+                </section>   
+                {%endfor%}
+            </div>
+        </div>
+
+
+    </div>
+    
+    {# 平滑滚动 #}
+    <script>
+    $(document).ready(function(){
+        $('.scrollspy').scrollSpy();
+    });
+        
+    </script>
+    
+ {%endblock%}
+

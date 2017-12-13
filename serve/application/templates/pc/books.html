@@ -49,17 +49,36 @@
                 {# 书单信息，这里就需要循环了 #}
                 {% for bookslist in cate.category_bookslist %}
                 <div class="container-fluid">
-
+                 
                     <i class="material-icons"><span class="glyphicon glyphicon-book " aria-hidden="true"></span></i>
                     <h4 class="books_cate">
                         <span class="card-title">{{bookslist.bookslist_name}}</span>
                     </h4>
                     <span class="books_more" href="#">{{bookslist.bookslist_count}}本</span>
+                    
+                    <div class="book-download-data">
+                        {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
+                        {# VIP会员显示密码，非VIP显示地址 #}
+                            <code class="books_more book-code"  >
+                                本书单汇总网盘： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
+                                提取码:<code>{{bookslist.bookslist_password}} </code>
+                            </code>
+                        {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 0)%}
+                            <code class="books_more book-code"  >
+                                本书单打包下载地址： <a target="_blank"  href="{{bookslist.bookslist_url}}">{{bookslist.bookslist_url}}</a> 
+                                提取码:<code>VIP会员可见</code>
+                            </code>
+                        {%else%}
+                            {# 游客就看不见 #}
+                        {%endif%}  
+
+                    </div>
+
                     <ul>
                         {# 书本，需要循环 #}
                         {%for book in bookslist.bookslist_book%}
-                        <li class="books_list">
-                            <a href="javascript:void(0);">
+                        <li class="books_list" >
+                            <a href="#!" class="books-download-info" >
                                 <img src="{{book.book_img_url}}" alt="" class="books_img">
                                 <h5 class="books_name">{{book.book_name}}</h5>
                                 <span class="books_description">{{book.book_desc}}</span>
@@ -73,12 +92,16 @@
                                 
                                 {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
                                     <span class="books_down">
-                                        <a href="{{book.book_download_url}}"><div class="chip books-chip">PDF下载 </div></a>
-                                    
+                                        {%if book.book_download_url  %}
+                                            <a  target="_blank" href="{{book.book_download_url}}"><div class="chip books-chip">PDF下载<br>(提取密码:{{book.book_download_password}}) </div></a>
+                                        {% elif bookslist.bookslist_url %}
+                                            <a target="_blank" href="{{bookslist.bookslist_url}}"><div class="chip books-chip">PDF下载</div></a>
+
+                                        {%endif%}
                                     </span>
                                 {%else%}
                                     <span class="books_down">
-                                        <a href="#" onclick="Materialize.toast('非VIP会员不支持PDF下载:）', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
+                                        <a href="#" onclick="Materialize.toast('仅VIP用户可下载', 1800,)" ><div class="chip books-chip">PDF下载 </div></a>
                                     
                                     </span>       
                                 {%endif%}
@@ -100,6 +123,7 @@
 
     </div>
     
+
     <!-- 非VIP用户提醒弹窗 -->
     <!-- modal内容，输入兑换码 -->
     <!-- <div class="remodal books_modal z-depth-2 " data-remodal-id="books_modal">
@@ -113,6 +137,9 @@
             <button type="submit" data-remodal-action="confirm" class="remodal-confirm">确认</button>
         </div>
     </div> -->
+    
+
+
 
 
     {# 开发信息 #}
@@ -130,4 +157,24 @@
     {%endif%}
 
 
+{%endblock%}
+
+
+{% block js %}
+
+    {# JQ脚本 #}
+    <script>
+    $(function(){  
+        $('.books-download-info').click(function(){//点击a标签  
+            if($('.test').is(':hidden')){//如果当前隐藏  
+            $('.test').show();//那么就显示div  
+            }else{//否则  
+            $('.test').hide();//就隐藏div  
+            }  
+        })  
+    }) 
+
+    </script>
+
+ 
 {%endblock%}
