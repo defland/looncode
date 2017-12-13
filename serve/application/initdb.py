@@ -398,6 +398,10 @@ def add_project(data=[]):
 
     return Projects.add_project(data)
 
+def get_log():
+    pass
+    return Update_Log.get_meassage()
+
 def get_project():
     return Project_Type.get_all_data()
 
@@ -420,6 +424,8 @@ if __name__ == "__main__":
     pass
     # print Vipcode.init_vipcode(50)
     # print add_project_type()
-    print add_project()
+    # print add_project()
     # print get_project()
+
+    print get_log()
 

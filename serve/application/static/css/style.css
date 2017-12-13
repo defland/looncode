@@ -754,15 +754,49 @@ input[type=text].valid:not(.browser-default){
     
 
 }
+.user-message{
+
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    float: right;
+    
+}
+
+
 .login_links a{
     
-    display: block;
+    display: inline-block;
     float: right;
     position: relative;
     line-height: 44px;
     font-size: 12px;
-    margin: 0px 20px;
+    margin-right:20px;
+    margin-left: 0px;
     color: #333;
+}
+.login-a{
+    
+    font-weight: 500;
+}
+
+.inbox-a{
+
+   
+}
+.im_data {
+
+    
+}
+.im_title{
+
+    text-align: left;
+    font-size: 15px;
+}
+.im_content{
+
+    text-align: left;
+    font-size: 14px;
 
 }
 

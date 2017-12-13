@@ -8,7 +8,7 @@ import json
 from config.config import config 
 
 # 导入sqlalchemy的相关
-from sqlalchemy import Column,Integer, String,Float,Boolean,create_engine,ForeignKey
+from sqlalchemy import Column,Integer, String,Float,Boolean,create_engine,ForeignKey,desc
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -1616,7 +1616,39 @@ class Projects(Base):
         return {'flag':True,'status':'add succeed'}
         pass
 
+
+# 项目条目表
+class Update_Log(Base):
+    """项目条目表"""
+    __tablename__ = 'Update_Log'
+
+    id = Column('id',Integer, primary_key=True,autoincrement=True)
+    title = Column('title',String)
+    content = Column('content',String)
+    time = Column('time',String)
     
+    # 获取session
+    @staticmethod
+    def get_session(engine):
+        # 获取session对象
+        DBSession = sessionmaker(bind=engine)
+        sess = DBSession()
+        print "Get sesssion OK"
+        return sess
+
+    # 查、增、验证、修改密码、
+    @staticmethod
+    def get_meassage():
+        
+        sess = Update_Log.get_session(engine)
+        data = {}
+        # 找出最后一条
+        result = sess.query(Update_Log).order_by(desc(Update_Log.id)).first()
+        print "类型",type(result)
+        print "方法",result.title
+        data = result
+
+        return {"flag":True,'status':"get data succee",'data':data}
 
 
 # 用于注册登录的用户类

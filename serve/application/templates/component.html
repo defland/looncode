@@ -16,16 +16,18 @@
 
 
 <!--登录注册组件 -->
-{% macro login_panel(current_user=None,current_url='',next_url='') %}
+{% macro login_panel(current_user=None,current_url='',next_url='',has_im=1) %}
     
-<!--     {{current_user.__dict__}} -->
+<!--   {{current_user.__dict__}} -->
 
     <!-- 注册登录、我的面板 -->
     {# 用户信息 #}
     {% if (current_user.is_authenticated) %}
     <div class="user_login ">
         <div class="login_links">
-            <a href="#" class=" button-collapse" data-activates="is_active_course_nav" > 
+
+            {# 注册登录入口 #}
+            <a href="#" class=" button-collapse login-a" data-activates="is_active_course_nav" > 
                 {{ current_user.id }}
                 {%if current_user.data.user_type==0 %}
                     <span class="label  grey lighten-1 ">免费用户</span>
@@ -34,20 +36,32 @@
                 {%endif%}
                  <i class="material-icons dp48">arrow_drop_down</i>
              </a>
-               
+            {# 网站更新公告 #}
+            {%if has_im == 1%}
+                <a href="#im_modal" class="inbox-a">更新公告</a>
+            {%endif%}      
         </div>
     </div>
 
     {%else%}
-        <!-- 注册登录 -->
-        <div class="user_login ">
-            <div class="login_links">
-                <a href="#login_modal">注册 | 登录</a>
-            </div>
+    <!-- 注册登录 -->
+    <div class="user_login ">
+        <div class="login_links">
+
+            {# 注册登录入口 #}
+            <a href="#login_modal" class="login-a">注册 | 登录</a>
+            {# 网站更新公告 #}
+            {%if has_im == 1%}
+            <a href="#im_modal " class="inbox-a">更新公告</a>
+            {%endif%}
+
         </div>
+    </div>
     {% endif %}
+    
+
     <!-- 弹出层 -->
-        {# 这里是弹出层，输入购买验证码 #}
+    {# 这里是弹出层，用来注册登录 #}
     <!-- modal内容，输入兑换码 -->
     <div class="remodal login_register_modal z-depth-2 " data-remodal-id="login_modal">
         
@@ -113,6 +127,31 @@
         </div>
 
         
+    </div>
+
+    {# 更新公告的弹出层 #}
+    <div class=" remodal inbox_modal z-depth-2 " data-remodal-id="im_modal">
+        
+        <h5>更新公告</h5>
+        <div class="im_data">
+            
+            <p class="im_title">v3.0更新公告，应小伙伴们需求:</p>
+            <p class="im_content" >
+            1、增加书单功能，根据知乎等社区分享书单汇总各个领域书单推荐，会员可PDF下载。
+            <br>
+            2、视频库新增收录extjs、小程序开发、.NET开发、网络安全、网络工程师等领域100+套课程。
+            <br>
+            3、新增懒人导航功能，收录各个领域比较好的技术学习网站。
+            <br>
+            4、全站VIP会员正式上线，完全享受站内所有500+资源和特权，需要的勾搭我们。
+            <br>
+            5、更新替换部分课程失效链接。
+            </p>        
+            <p class="im_content">把200%的努力放在编程实践上，去改变世界，而非资料收集。</p>
+
+        </div>
+
+
     </div>
 
 {% endmacro %}
