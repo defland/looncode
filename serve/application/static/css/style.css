@@ -1014,6 +1014,23 @@ input::-ms-input-placeholder {
 }
 
 /*projects.html*/
+
+/*媒体查询*/
+
+@media screen and (max-width: 800px){
+
+    
+    .left-project-left{
+        
+        display: none;
+    }
+    .left-project-nav{
+        display: none;
+    }
+
+}
+
+
 .project-container{
     
 

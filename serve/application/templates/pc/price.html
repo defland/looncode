@@ -67,9 +67,8 @@
                     <li>凭码免费兑换新课程</li>
                     <br>
                     <li>学习书单查看</li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li>懒人导航查看</li>
+
                 </ul>
             </div>
             {% if (current_user.is_authenticated) and (current_user.data.get('user_type') == 1) %}
@@ -110,6 +109,7 @@
                 <li class="" >会员限免课程</li>
                 <br>
                 <li class="" >学习书单查看</li>
+                <li class="" >懒人导航查看</li>
                 <li class="" >学习线路图和技能树（即将上线)</li>
                 <li></li>
                 <li></li>
@@ -154,18 +154,14 @@
                 <li>16+ 套全领域汇总包</li>
                 <li>200+ 本学习书籍</li>
                 <br>
-                
-                <li class="">所有课程已激活，无需单独购买</li>
-                <li class="" >登录获取更新课程</li>
-                <!-- <li class="">VIP独家收录课程</li> -->
+                <li class="">全站课程库兑换权限</li>
+                {# <li class="" >登录获取更新课程</li> #}
+                <li class="">VIP独家收录课程</li>
+                <li class="" >学习书单查看和PDF下载</li>
                 <br>
-                <li class="" >学习书单查看</li>
-                <li class="" >书单PDF下载</li>
-                <br>
-                <li class="" >实战项目导航（即将上线)</li>
+                <li class="" >懒人导航查看</li>
+                <li class="" >实战项目库（即将上线)</li>
                 <li class="" >学习线路图和技能树（即将上线)</li>
-                <li class="" >岗位招聘数据统计（即将上线)</li>
-                <li class="" ></li>
                 <li></li>
             </ul>
             </div>

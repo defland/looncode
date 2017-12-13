@@ -388,11 +388,11 @@ def add_project(data=[]):
     data = {
 
         'id':None,
-        'name':'Rx.js中文文档',
-        'desc':'未来可能火起来的JS框架',
-        'tag':'在线文档',
-        'project_url':r'http://cn.rx.js.org?url=looncode.com',
-        'projects_type_id':3,
+        'name':'QMUI',
+        'desc':'腾讯QMUITeam出品的UI框架，涵盖的WEB/IOS/Android3个领域。',
+        'tag':'UI框架',
+        'project_url':r'http://qmuiteam.com?url=looncode.com',
+        'projects_type_id':14,
         'is_free':True
     }
 

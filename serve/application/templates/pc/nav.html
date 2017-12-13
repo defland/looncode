@@ -18,7 +18,8 @@
         <div class="row project-row">
             {# 导航 #}
             <div class="row project-row">
-                <div class="left-project-nav col-md-2  ">
+                <div class="left-project-nav col-md-2 col-sm-1 col-xs-1 col-lg-2
+   ">
                    
                     <div class="project-nav-title">
                         {# <h5>项目导航</h5> #}
@@ -47,8 +48,8 @@
                 </div>
 
             </div>
-            <div class="left-project-left col-md-2"></div>
-            <div class="right-project-data col-md-10">
+            <div class="left-project-left col-md-2 col-sm-0  col-xs-1 col-lg-2"></div>
+            <div class="right-project-data col-md-10 col-sm-12  col-xs-12  col-lg-10  ">
                 {# 导航数据 #}
 
                 {%for pj in project_data %}
@@ -67,11 +68,11 @@
                         {%else%}  
                             <a href="#" onclick="Materialize.toast('VIP会员可查看此项目:）', 1800,)" class="project-data-a">  
                         {%endif%}
-                            <div class="project-data-prject col-md-4  waves-effect ">
+                            <div class="project-data-prject col-sm-3 col-md-4  col-lg-3 waves-effect ">
                                 {%if project.project_is_free == 0 %}
                                     <span class="label label-success is_active-label project-label gree lighten-1">会员</span>
                                 {%elif (current_user.is_authenticated) and (current_user.data.get('user_type') == 1)  %}
-                                    <span class="label label-success is_active-label project-label grey lighten-1">已解锁</span>
+                                    <span class="label label-success is_active-label project-label grey lighten-1"></span>
                                 {%endif%}
                                 <span class="project-data-span">{{project.project_name | capitalize() }}</span>
                                 <div class="l-title-line line-opacity "></div> 
