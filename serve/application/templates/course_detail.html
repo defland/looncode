@@ -64,7 +64,7 @@
                     <tr>
                         <th>|</th>
                         <th>课程名称</th>
-                        <th>内容包含</th>
+                        <th>项目目录</th>
                         <th>更新日期</th>
                         <th>资源链接</th>
                         <th>资源大小</th>
@@ -111,7 +111,7 @@
                     
                     <tr>
                         <td class = "update_time" >all</td>
-                        <td >[ALL].所有课程打包一次转存,空间占较多，建议选择个保存（近期百度云政策调整，超大文件分享容易被和谐，如此链接无效请私聊转存）</td>
+                        <td >[ALL].所有课程打包一次转存,空间占较多，建议选择个保存（近期百度网盘超大文件分享容易被和谐，若此链接无效请挨个转存。）</td>
                         <td class = "update_time"><span class="label tooltipped  label-default label-default-tags" >汇总</span></td>
                         <td class = "update_time" >-</td>
                         <td><a target="_blank" href="{{course_data.course_share_url}}">{{course_data.course_share_url}}</a></td>
@@ -121,8 +121,11 @@
                         {% elif member_free  %}
                             <td><a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="/login" >会员登录可见</a></td>
                         {%else%}
-                            <td><a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="#act_modal" >显示提取密码</a><td>
+                            <td>
+                                <a class="waves-effect waves-light z-depth-0 small btn grey darken-3" href="#act_modal" >显示提取密码</a>
+                            <td>
                         {%endif%}
+
                     </tr>
 
                    
