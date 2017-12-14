@@ -20,6 +20,9 @@
     
     <div class="container-fluid course_info_nav">
     
+        <!-- 注册登录入口和登录模态窗口 -->
+        {{md.login_panel(current_user=current_user,current_url='/course',next_url='/course',has_im=0)}}
+
         {# 预留 #}
         <div class="l-user-tools row">
             <div class="container">

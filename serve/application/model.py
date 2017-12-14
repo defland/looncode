@@ -1644,10 +1644,14 @@ class Update_Log(Base):
         data = {}
         # 找出最后一条
         result = sess.query(Update_Log).order_by(desc(Update_Log.id)).first()
-        print "类型",type(result)
-        print "方法",result.title
-        data = result
+        data = {
 
+            'id':result.id,
+            'title':result.title,
+            'content':result.content,
+            'time':result.time
+        }
+        
         return {"flag":True,'status':"get data succee",'data':data}
 
 

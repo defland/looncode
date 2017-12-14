@@ -207,8 +207,18 @@ class Data_Processor(object):
      
     @staticmethod
     def get_project_with_nav():
-        # 获取数据
+    # 获取数据
         
         return Project_Type.get_all_data()
+
+    @staticmethod
+    def get_update_news():
+        # 获取数据
+        result = Update_Log.get_meassage()
+        if result.get('flag') == True:
+            print result.get('data')
+            return result.get('data')
+        else:
+            return None 
 
 

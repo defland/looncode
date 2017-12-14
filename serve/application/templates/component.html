@@ -16,7 +16,7 @@
 
 
 <!--登录注册组件 -->
-{% macro login_panel(current_user=None,current_url='',next_url='',has_im=1) %}
+{% macro login_panel(current_user=None,current_url='',next_url='',has_im=0,update_news='') %}
     
 <!--   {{current_user.__dict__}} -->
 
@@ -38,7 +38,7 @@
              </a>
             {# 网站更新公告 #}
             {%if has_im == 1%}
-                <a href="#im_modal" class="inbox-a">更新公告</a>
+                <a href="#im_modal" class="inbox-a">近期更新</a>
             {%endif%}      
         </div>
     </div>
@@ -52,7 +52,7 @@
             <a href="#login_modal" class="login-a">注册 | 登录</a>
             {# 网站更新公告 #}
             {%if has_im == 1%}
-            <a href="#im_modal " class="inbox-a">更新公告</a>
+            <a href="#im_modal " class="inbox-a">近期更新</a>
             {%endif%}
 
         </div>
@@ -135,18 +135,9 @@
         <h5>更新公告</h5>
         <div class="im_data">
             
-            <p class="im_title">v3.0更新公告，应小伙伴们需求:</p>
+            <p class="im_title">{{update_news.title}}({{update_news.time}}): </p>
             <p class="im_content" >
-            1、增加书单功能，根据知乎等社区分享书单汇总各个领域书单推荐，会员可PDF下载。
-            <br>
-            2、视频库新增收录extjs、小程序开发、.NET开发、网络安全、网络工程师等领域100+套课程。
-            <br>
-            3、新增懒人导航功能，收录各个领域比较好的技术学习网站。
-            <br>
-            4、全站VIP会员正式上线，完全享受站内所有500+资源和特权，需要的勾搭我们。
-            <br>
-            5、更新替换部分课程失效链接。
-            </p>        
+            {{update_news.content|safe}}      
             <p class="im_content">把200%的努力放在编程实践上，去改变世界，而非资料收集。</p>
 
         </div>
