@@ -53,8 +53,21 @@ def load_user(username):
     curr_user.data = user_info.get('user_data')
     return curr_user
 
-# 注册登录
+# 全局数据
 
+# 站点公告更新日志获取
+# update_news = Data_Processor.get_update_news()
+# 开启缓存
+if R.get('site_update_news') != None:
+    print "update_news来自Redis缓存"
+    update_news  = eval(R.get('site_update_news'))
+else:
+    update_news = Data_Processor.get_update_news()
+    print 'update_news缓存写入'
+    R.set('site_update_news',update_news,ex=CACHE_TIME,nx=True)
+
+
+# 注册登录
 @app.route('/login',methods=['POST','GET'])
 @app.route('/register',methods=['POST','GET'])
 def login():
@@ -260,7 +273,8 @@ def index():
         category=cate_data.get('category_data'),
         has_active_course=cate_data.get('has_active_course'),
         dev_data=dev_data,
-        current_user =current_user
+        current_user =current_user,
+        update_news = update_news
         )
 
 
@@ -331,7 +345,6 @@ def course_detail(course_id):
                 session['course_'+str(course_id)] = 'user_login' # 设置session
                 print '写入的session:',session
        
-
 
                 # 返回带密码的数据和写入cookies
                 resp = make_response(\
@@ -407,9 +420,7 @@ def course_detail(course_id):
 def course_activete():
     # pass
     
-    # session增加计时器，错误超过5次就不进行验证了，直接返回错误（防爆破解
-    
-    
+    # session增加计时器，错误超过5次就不进行验证了，直接返回错误（防爆破)
     if request.method == 'GET':
         return render_template('act.html')
     elif request.method == 'POST':
@@ -470,14 +481,14 @@ def books():
 
     # 不用redis缓存
     # cate_data = Data_Processor.get_category_has_bookdata()
-    print cate_data
     # 获取分类和课程信息
     dev_data = Data_Processor.get_devtools_data()
     return render_template( \
         '/pc/books.html',
         all_books_data = cate_data,
         dev_data=dev_data,
-        current_user=current_user 
+        current_user=current_user,
+        update_news = update_news 
         )
 
 @app.route('/ways')
@@ -502,7 +513,13 @@ def projects():
     
     # 不适用缓存
     # project_data =  Data_Processor.get_project_with_nav().get('data')
-    return render_template('/pc/nav.html',project_data=project_data,current_user=current_user)
+    
+    return render_template( \
+        '/pc/nav.html',
+        project_data=project_data,
+        current_user=current_user,
+        update_news = update_news
+    )
 
 
 @app.route('/membership',methods=['POST','GET'])
@@ -517,7 +534,11 @@ def membership():
     #     page = render_template('/pc/price.html')
     #     print '价格页面缓存写入',R.set('page_membership',page,ex=CACHE_TIME,nx=True)
     #     return render_template('/pc/price.html')
-    return render_template('/pc/price.html',current_user=current_user)
+    return render_template(\
+        '/pc/price.html',
+        current_user=current_user,
+        update_news = update_news
+    )
 
 
 @app.route('/vipactive',methods=['POST','GET'])
@@ -552,6 +573,9 @@ def welcome():
 @app.route('/get_course_txt/<int:course_id>')
 def get_course_txt(course_id):
     
+    #  
+
+
     content = "课程导出:\n--------------------\n"
     course_data = Data_Processor.get_course_data(course_id).get('course_data')
     content = content + '\n课程集: 《' + str(course_data.get('course_name')) + "》"
