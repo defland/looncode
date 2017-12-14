@@ -346,7 +346,6 @@ def course_detail(course_id):
                 print '写入的session:',session
        
 
-
                 # 返回带密码的数据和写入cookies
                 resp = make_response(\
                     render_template("course_detail.html",course_data=course_data,passwd_dict=course_data.get('passwd_dict'),dev_data=dev_data)
@@ -574,6 +573,9 @@ def welcome():
 @app.route('/get_course_txt/<int:course_id>')
 def get_course_txt(course_id):
     
+    #  
+
+
     content = "课程导出:\n--------------------\n"
     course_data = Data_Processor.get_course_data(course_id).get('course_data')
     content = content + '\n课程集: 《' + str(course_data.get('course_name')) + "》"
