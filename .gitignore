@@ -6,6 +6,8 @@ __pycache__/
 # db
 *.db
 
+.DS_Store
+
 # C extensions
 *.so
 
