@@ -429,7 +429,7 @@ input[type=text].valid:not(.browser-default){
     float: right;
 }
 
-.tooltipped{
+.my-tooltipped{
 
     background-color: #fff!important;
 }
@@ -526,7 +526,15 @@ input[type=text].valid:not(.browser-default){
 
 }
 
+.resource-info-title{
 
+}
+
+.resource-info-content{
+    
+    font-size: 13px;
+    text-align: left;
+}
 /* ========act.html==== */
 /* 激活码填写区域 */
 

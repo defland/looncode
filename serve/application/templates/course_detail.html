@@ -67,8 +67,8 @@
                     <tr>
                         <th>|</th>
                         <th>课程名称</th>
-                        <th>项目目录</th>
-                        <th>更新日期</th>
+                        <th>类型</th>
+                        <th>详细目录</th>
                         <th>资源链接</th>
                         <th>资源大小</th>
                         <th>提取密码</th>
@@ -104,20 +104,35 @@
                         <td> 
                             <!-- 代表：1：视频，2：视频+源码 3：视频+项目实战 4：书籍 5：源码  -->
                             {% if i.content_type == 1 %}
-                                <span class="label  tooltipped label-default label-default-tags " data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频</span>
+                                <span class="label  tooltipped my-tooltipped label-default label-default-tags ">视频</span>
                             {% elif i.content_type == 2 %}
-                                <span class="label tooltipped label-default label-default-tags"  data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频 + 源码</span>
+                                <span class="label tooltipped my-tooltippedlabel-default label-default-tags">视频 + 源码</span>
                             {% elif i.content_type == 3%}
-                                <span class="label tooltipped  label-default label-default-tags"  data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频 + 项目实战</span>
+                                <span class="label tooltipped my-tooltipped label-default label-default-tags">视频 + 项目实战</span>
                             {% elif i.content_type == 4 %}  
-                                <span class="label  tooltipped  label-default label-default-tags"  data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">书籍</span>
+                                <span class="label  tooltipped my-tooltipped label-default label-default-tags" >书籍</span>
                             {% elif i.content_type == 5 %}
-                                <span class="label  tooltipped  label-default label-default-tags" data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">源码</span>
+                                <span class="label  tooltipped my-tooltipped label-default label-default-tags">源码</span>
                             {% else  %}
-                                <span class="label tooltipped  label-default label-default-tags" data-position="top" data-delay="50"data-tooltip="{{i.resource_description}}">视频</span>
+                                <span class="label tooltipped my-tooltipped label-default label-default-tags" >视频</span>
                             {%endif%}
                         </td>
-                        <td class="update_time">{{i.update_time}}</td>
+                        <!-- 课程目录入口和弹窗 -->
+                        <td class="update_time">
+                            <a href="#{{i.resource_id}}_modal"><span class="label label-default tooltipped " data-position="top" data-delay="50"data-tooltip="点击查看课程目录">目录</span></a>
+                            <!-- 模态弹窗 -->
+                            <div class="remodal  z-depth-2 " data-remodal-id="{{i.resource_id}}_modal">
+                                <span class="resource-info-title" >课程目录和介绍</span>
+                                <br><br>
+                                    
+                                <p class="resource-info-content" >{{i.resource_description|safe}}</p>
+                                    
+                            </div>
+
+                        </td>
+
+
+                        <!-- 百度云链接 -->
                         <td><a target="_blank" href="{{i.resource_addr}}">{{i.resource_addr}}</a></td>
                         <td class="update_time" >{{i.resource_size}} G</td>
                         <td>

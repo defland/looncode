@@ -388,11 +388,11 @@ def add_project(data=[]):
     data = {
 
         'id':None,
-        'name':'QMUI',
-        'desc':'腾讯QMUITeam出品的UI框架，涵盖的WEB/IOS/Android3个领域。',
-        'tag':'UI框架',
-        'project_url':r'http://qmuiteam.com?url=looncode.com',
-        'projects_type_id':14,
+        'name':'scrapy框架中文入门文档',
+        'desc':'完整的scrapy学习文档',
+        'tag':'在线文档',
+        'project_url':r'http://scrapy-chs.readthedocs.io/zh_CN/latest/intro/tutorial.html?api=mysql-5.1-zh&url=looncode.com',
+        'projects_type_id':8,
         'is_free':True
     }
 
@@ -424,8 +424,8 @@ if __name__ == "__main__":
     pass
     # print Vipcode.init_vipcode(50)
     # print add_project_type()
-    # print add_project()
+    print add_project()
     # print get_project()
 
-    print get_log()
+    # print get_log()
 
