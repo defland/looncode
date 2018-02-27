@@ -41,10 +41,21 @@ v1.0:
 # 技术栈
 
 开发：
-Flask + Redis + Sqlite 
+Flask + Redis + Sqlite3  + 
+
+- Flask为基础框架，个人全栈开发，使用非RESTful不分离方式。
+- 基于jinja2模板渲染
+- 使用SQLAlchemy ORM 管理 SQLite3，进行增删改查
+- 使用Redis缓存。作为View视图缓存和部分model层数据缓存，提高网站可承受访问量
+- 前端采用materializecss框架(UI定制版本的bootstarp)进行布局和设计，和部分JS
+
 
 部署：
-Centos + Nginx + Gunicorn(gevent)
+Centos + Nginx + Gunicorn(gevent) + yhook
+
+- Centos7 + Nginx 为主要运行环境
+- Gunicorn(gevent) 提高并发量
+- yhook为自写的自动部署服务脚本，利用github webhook，运行服务器自动监控源码，有push更新自动重启服务器web服务
 
 
 # 项目目录说明
@@ -74,3 +85,5 @@ defland@MBP ~/W/P/r/looncode> tree -L 3                           �
     └── runserver.py # 程序部署执行入口
     
 ```
+
+
