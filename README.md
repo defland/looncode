@@ -22,6 +22,7 @@ v3.0
 v2.0：
 - 增加学习数据推荐清单。
 - 增加好站点导航。
+- 增加移动端适配，单独的移动端前端设计和开发。
 
 v1.0:
 
@@ -41,7 +42,7 @@ v1.0:
 # 技术栈
 
 开发：
-Flask + Redis + Sqlite3  + 
+Flask + Redis + Sqlite3  + materializecss
 
 - Flask为基础框架，个人全栈开发，使用非RESTful不分离方式。
 - 基于jinja2模板渲染
