@@ -30,9 +30,11 @@ v1.0:
 - 免登陆，用户获取兑换码后，第一次兑换之后，写入cookies保存兑换记录，记住用户兑换记录。
 
 
-[looncode.com](http://looncode.com)
 
-# 截图
+# 演示站点和截图
+
+[looncode.com](http://looncode.com) 或 百度 懒人编程
+
 
 [![9BNUf0.png](https://s1.ax1x.com/2018/02/27/9BNUf0.png)](https://imgchr.com/i/9BNUf0)
 
