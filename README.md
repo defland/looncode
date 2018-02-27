@@ -48,8 +48,8 @@ Flask + Redis + Sqlite3  + materializecss
 - 基于jinja2模板渲染
 - 使用SQLAlchemy ORM 管理 SQLite3，进行增删改查
 - 使用Redis缓存。作为View视图缓存和部分model层数据缓存，提高网站可承受访问量
-- 前端采用materializecss框架(UI定制版本的bootstarp)进行布局和设计，和部分JS
-
+- PC前端采用materializecss框架(UI定制版本的bootstarp)进行布局和设计，和部分JS,
+- 移动版前端采用AmazeUI作为布局和设计
 
 部署：
 Centos + Nginx + Gunicorn(gevent) + yhook
