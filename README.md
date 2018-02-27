@@ -6,7 +6,7 @@
 
 # 截图
 
-![截图](http://readme-1253118766.file.myqcloud.com/WX20180227-212046%402x.png)
+![截图](https://imgchr.com/i/9BNUf0)
 
 # 技术栈
 
