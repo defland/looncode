@@ -45,3 +45,30 @@ Flask + Redis + Sqlite
 Centos + Nginx + Gunicorn(gevent)
 
 
+# 项目目录说明
+
+```
+
+defland@MBP ~/W/P/r/looncode> tree -L 3                                                      11 dev!?
+.
+├── README.md
+└── serve
+    ├── application
+    │   ├── __init__.py 
+    │   ├── config # 项目配置文件
+    │   ├── db # SQLite3数据库db文件
+    │   ├── dev_tools.py # 开发调试扩展工具包(版本标记、数据打印等)
+    │   ├── doc # 相关项目设计文档、API文档
+    │   ├── initdb.py # 数据库初始化脚本
+    │   ├── middleware.py # 中间件层
+    │   ├── model.py # Model层 ，使用SQLAlchemy ORM 管理 SQLite3
+    │   ├── static  # 静态资源
+    │   ├── templates  # 采用模板渲染，暂时没有采用RESTful API
+    │   ├── view.py  # view视图函数
+    ├── gunicorn_config  # gunicorn(gevent)部署的环境配置文件
+    │   ├── gunconf_dev.py
+    │   ├── gunconf_local.py
+    │   └── gunconf_stable.py 
+    └── runserver.py # 程序部署执行入口
+    
+```
