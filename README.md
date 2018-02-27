@@ -6,7 +6,7 @@
 
 # 截图
 
-![截图](https://imgchr.com/i/9BNUf0)
+[![9BNUf0.png](https://s1.ax1x.com/2018/02/27/9BNUf0.png)](https://imgchr.com/i/9BNUf0)
 
 # 技术栈
 
